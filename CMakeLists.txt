@@ -19,6 +19,8 @@ add_custom_target(generate_sobol_tables
 )
 
 enable_testing()
+
+# Basic test suite
 add_executable(test_sobol tests/test_sobol.cpp)
 target_link_libraries(test_sobol PRIVATE sobol)
 if(MSVC)
@@ -27,3 +29,13 @@ else()
   target_compile_options(test_sobol PRIVATE -UNDEBUG)
 endif()
 add_test(NAME sobol_core_test COMMAND test_sobol)
+
+# Enhanced comprehensive test suite
+add_executable(test_sobol_enhanced tests/test_sobol_enhanced.cpp)
+target_link_libraries(test_sobol_enhanced PRIVATE sobol)
+if(MSVC)
+  target_compile_options(test_sobol_enhanced PRIVATE /UNDEBUG)
+else()
+  target_compile_options(test_sobol_enhanced PRIVATE -UNDEBUG)
+endif()
+add_test(NAME sobol_enhanced_test COMMAND test_sobol_enhanced)
