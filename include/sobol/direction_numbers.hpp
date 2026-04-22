@@ -43,13 +43,8 @@ inline std::vector<std::uint32_t> enforce_property_a_initial_numbers(
     const std::uint32_t upper_bit = (1u << static_cast<unsigned>(i - 1u));
     const std::uint32_t mask = (1u << static_cast<unsigned>(i)) - 1u;
     // Cycle through seed chunks to derive deterministic per-bit candidates.
-    std::uint32_t candidate = ((seed >> static_cast<unsigned>((i - 1u) % 16u)) | upper_bit | 1u) & mask;
-    candidate |= upper_bit;
-    candidate |= 1u;
-
-    if ((candidate & upper_bit) == 0u) {
-      candidate ^= upper_bit;
-    }
+    const std::uint32_t candidate =
+        ((seed >> static_cast<unsigned>((i - 1u) % 16u)) | upper_bit | 1u) & mask;
 
     bool accepted = false;
     for (std::uint32_t odd = candidate | 1u; odd <= mask; odd += 2u) {
@@ -102,7 +97,7 @@ inline std::array<std::uint32_t, kSobolBits> direction_numbers_for_dimension(
 
   const std::uint32_t poly = primitive_polynomials[dimension_index - 1u];
   const std::size_t degree = static_cast<std::size_t>(detail::degree(poly));
-  // 0x9E37 (derived from the golden-ratio bit mixer) decorrelates dimension seeds.
+  // Mix polynomial bits with a small odd constant to decorrelate per-dimension seeds.
   const auto m =
       enforce_property_a_initial_numbers(degree, poly ^ static_cast<std::uint32_t>(dimension_index * 0x9E37u));
 

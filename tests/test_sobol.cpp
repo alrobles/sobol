@@ -40,7 +40,7 @@ int main() {
 
   {
     sobol::SobolEngine from_start(3u);
-    for (int i = 0; i < 17; ++i) {
+    for (int skip_count = 0; skip_count < 17; ++skip_count) {
       (void)from_start.next();
     }
     const auto expected = from_start.next();
