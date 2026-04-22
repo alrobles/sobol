@@ -13,11 +13,14 @@ namespace sobol {
 // `as_column_major` returns data in R matrix layout (column-major order).
 inline std::vector<double> sobol_points_column_major(std::size_t n, std::size_t dimensions,
                                                      std::uint64_t skip = 0u) {
-  const auto points = sobol_points(n, dimensions, skip);
   std::vector<double> out(n * dimensions);
-  for (std::size_t col = 0u; col < dimensions; ++col) {
-    for (std::size_t row = 0u; row < n; ++row) {
-      out[col * n + row] = points[row][col];
+  SobolEngine engine(dimensions);
+  engine.skip(skip);
+
+  for (std::size_t row = 0u; row < n; ++row) {
+    const auto point = engine.next();
+    for (std::size_t col = 0u; col < dimensions; ++col) {
+      out[col * n + row] = point[col];
     }
   }
   return out;
