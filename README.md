@@ -1,5 +1,8 @@
 # sobol
 
+[![C++ Tests](https://github.com/alrobles/sobol/actions/workflows/cpp-tests.yml/badge.svg)](https://github.com/alrobles/sobol/actions/workflows/cpp-tests.yml)
+[![R Package Tests](https://github.com/alrobles/sobol/actions/workflows/r-tests.yml/badge.svg)](https://github.com/alrobles/sobol/actions/workflows/r-tests.yml)
+
 Header-only C++17 Sobol sequence core library with precomputed direction numbers.
 
 ## Features
@@ -16,6 +19,22 @@ Header-only C++17 Sobol sequence core library with precomputed direction numbers
 cmake -S . -B build
 cmake --build build
 ctest --test-dir build --output-on-failure
+```
+
+For comprehensive testing documentation, see [TESTING.md](TESTING.md).
+
+### Test Coverage
+
+The library includes extensive test suites:
+
+- **C++ Tests**: 28+ test functions covering Property A validation, mathematical correctness (1-10D), sequence validity, corner cases, and precomputed tables
+- **R Tests**: 77 test cases covering API usability, edge cases, mathematical correctness, and consistency with C++ backend
+- **CI/CD**: Automated testing on Ubuntu, macOS, and Windows via GitHub Actions
+- **Extreme Cases**: Comprehensive testing for transparent replacement of `sobol_design` in `pomp-explore`
+
+Run the test coverage summary:
+```bash
+bash scripts/test_coverage_summary.sh
 ```
 
 ## Standalone C++ API
