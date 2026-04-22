@@ -1,3 +1,8 @@
 /build/
 ..Rcheck/
 *.Rcheck/
+*.tar.gz
+*.o
+*.so
+src/*.o
+src/*.so

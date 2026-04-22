@@ -150,7 +150,7 @@ test_that("query functions validate input", {
 # Test Batch Function
 
 test_that("sobol_points generates correct dimensions", {
-  points <- sobol_points(n = 10, dimensions = 3)
+  points <- sobol_points(n = 10, dim = 3)
 
   expect_true(is.matrix(points))
   expect_equal(dim(points), c(10, 3))
@@ -159,17 +159,17 @@ test_that("sobol_points generates correct dimensions", {
 
 test_that("sobol_points handles skip parameter", {
   # Points without skip (first 5)
-  points1 <- sobol_points(n = 5, dimensions = 2, skip = 0)
+  points1 <- sobol_points(n = 5, dim = 2, skip = 0)
 
   # Points with skip (skip first 5, get next 5)
-  points2 <- sobol_points(n = 5, dimensions = 2, skip = 5)
+  points2 <- sobol_points(n = 5, dim = 2, skip = 5)
 
   # They should be different
   expect_false(identical(points1, points2))
 })
 
 test_that("sobol_points handles n=0", {
-  points <- sobol_points(n = 0, dimensions = 3)
+  points <- sobol_points(n = 0, dim = 3)
 
   expect_true(is.matrix(points))
   expect_equal(dim(points), c(0, 3))
@@ -250,7 +250,7 @@ test_that("skip produces consistent results", {
 
 test_that("batch and incremental produce same results", {
   # Batch generation
-  batch <- sobol_points(n = 10, dimensions = 3)
+  batch <- sobol_points(n = 10, dim = 3)
 
   # Incremental generation
   gen <- sobol_generator(dimensions = 3)
@@ -280,10 +280,16 @@ test_that("handles large skip values", {
 })
 
 test_that("sequence properties hold", {
-  # First point should be [0.5, 0.5, ...]
+  # First point should be [0, 0, ...] (index 0)
   gen <- sobol_generator(dimensions = 3)
   first_point <- sobol_next(gen)
 
-  # The first Sobol point is typically (0.5, 0.5, 0.5, ...)
-  expect_equal(first_point[1], 0.5)
+  # The first Sobol point at index 0 is (0, 0, 0, ...)
+  expect_equal(first_point[1], 0)
+  expect_equal(first_point[2], 0)
+  expect_equal(first_point[3], 0)
+
+  # Second point at index 1 should be [0.5, 0.5, 0.5, ...]
+  second_point <- sobol_next(gen)
+  expect_equal(second_point[1], 0.5)
 })
