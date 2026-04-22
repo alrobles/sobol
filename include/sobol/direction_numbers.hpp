@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <stdexcept>
+#include <utility>
 #include <vector>
 
 #include "sobol/primitive_polynomial.hpp"
@@ -35,7 +36,7 @@ inline bool is_full_rank(std::vector<std::uint32_t> rows, std::size_t width) {
   return rank == rows.size();
 }
 
-inline std::vector<std::uint32_t> enforce_property_a_initial_numbers(
+inline std::vector<std::uint32_t> enforce_initial_numbers_full_rank(
     std::size_t degree, std::uint32_t seed) {
   std::vector<std::uint32_t> m(degree, 1u);
 
@@ -70,7 +71,7 @@ inline std::vector<std::uint32_t> enforce_property_a_initial_numbers(
     }
 
     if (!accepted) {
-      throw std::runtime_error("failed to enforce Sobol Property A for initial direction numbers");
+      throw std::runtime_error("failed to find full-rank initial direction numbers");
     }
   }
 
@@ -99,7 +100,7 @@ inline std::array<std::uint32_t, kSobolBits> direction_numbers_for_dimension(
   const std::size_t degree = static_cast<std::size_t>(detail::degree(poly));
   // Mix polynomial bits with a small odd constant to decorrelate per-dimension seeds.
   const auto m =
-      enforce_property_a_initial_numbers(degree, poly ^ static_cast<std::uint32_t>(dimension_index * 0x9E37u));
+      enforce_initial_numbers_full_rank(degree, poly ^ static_cast<std::uint32_t>(dimension_index * 0x9E37u));
 
   for (std::size_t i = 1u; i <= degree; ++i) {
     v[i - 1u] = m[i - 1u] << static_cast<unsigned>(kSobolBits - i);

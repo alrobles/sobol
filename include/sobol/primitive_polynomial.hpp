@@ -1,6 +1,7 @@
 #ifndef SOBOL_PRIMITIVE_POLYNOMIAL_HPP
 #define SOBOL_PRIMITIVE_POLYNOMIAL_HPP
 
+#include <cstddef>
 #include <cstdint>
 #include <stdexcept>
 #include <vector>

@@ -8,7 +8,7 @@ The implementation is a modular header-only C++17 library:
   - Primitive polynomial discovery over GF(2) for requested dimensions.
 - `include/sobol/direction_numbers.hpp`
   - Direction number table construction.
-  - Joe-Kuo-style initialization with Property A enforcement through full-rank checks.
+  - Joe-Kuo-style initialization with per-dimension full-rank checks for initial direction values.
 - `include/sobol/sobol.hpp`
   - Gray-code incremental point generation (`next`) and direct `skip_to` logic.
 - `include/sobol/r_api.hpp`
@@ -18,7 +18,7 @@ The implementation is a modular header-only C++17 library:
 
 1. Primitive polynomials are generated from scratch by irreducibility + primitivity checks.
 2. Direction numbers are built via standard recurrence with primitive polynomial taps.
-3. Property A is enforced on initial direction numbers by requiring full rank over GF(2).
+3. Initial direction numbers are selected using GF(2) full-rank checks within each dimension.
 4. Successive points are produced in O(dimensions) using the rightmost-zero-bit update rule.
 
 # Mathematical Foundations

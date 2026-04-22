@@ -82,7 +82,29 @@ int main() {
 
   {
     sobol::SobolEngine engine(1u);
-    engine.skip_to(std::numeric_limits<std::uint64_t>::max());
+    bool threw = false;
+    try {
+      engine.skip_to(std::uint64_t{1} << sobol::detail::kSobolBits);
+    } catch (const std::out_of_range&) {
+      threw = true;
+    }
+    assert(threw);
+  }
+
+  {
+    bool threw = false;
+    try {
+      (void)sobol::SobolEngine(1u, std::uint64_t{1} << sobol::detail::kSobolBits);
+    } catch (const std::out_of_range&) {
+      threw = true;
+    }
+    assert(threw);
+  }
+
+  {
+    sobol::SobolEngine engine(1u, (std::uint64_t{1} << sobol::detail::kSobolBits) - 1u);
+    const auto point = engine.next();
+    assert(point.size() == 1u);
     bool threw = false;
     try {
       (void)engine.next();

@@ -31,9 +31,16 @@ class SobolEngine {
   std::uint64_t index() const noexcept { return index_; }
 
   std::vector<double> next() {
+    if (index_ > max_supported_index()) {
+      throw std::overflow_error("Sobol engine index exceeded 32-bit direction number capacity");
+    }
     const auto point = current_point();
     if (index_ == std::numeric_limits<std::uint64_t>::max()) {
       throw std::overflow_error("Sobol engine index overflowed 64-bit counter");
+    }
+    if (index_ == max_supported_index()) {
+      ++index_;
+      return point;
     }
     ++index_;
     const auto bit = trailing_zero_count(index_);
@@ -44,6 +51,9 @@ class SobolEngine {
   }
 
   void skip_to(std::uint64_t point_index) {
+    if (point_index > max_supported_index()) {
+      throw std::out_of_range("point_index exceeds supported range for 32-bit direction numbers");
+    }
     index_ = point_index;
     const std::uint64_t gray = point_index ^ (point_index >> 1u);
 
@@ -68,6 +78,10 @@ class SobolEngine {
   }
 
  private:
+  static constexpr std::uint64_t max_supported_index() {
+    return (std::uint64_t{1} << detail::kSobolBits) - std::uint64_t{1};
+  }
+
   static std::size_t trailing_zero_count(std::uint64_t value) {
     if (value == 0u) {
       throw std::invalid_argument("trailing_zero_count expects non-zero input");
