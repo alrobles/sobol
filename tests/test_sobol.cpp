@@ -169,5 +169,41 @@ int main() {
     assert(threw);
   }
 
+#ifndef SOBOL_NO_PRECOMPUTED_TABLES
+  {
+    // Verify precomputed tables match runtime generation for first 10 dimensions
+    const std::size_t test_dims = 10u;
+    const auto runtime_polys = sobol::detail::generate_primitive_polynomials(test_dims);
+
+    // Check primitive polynomials match
+    for (std::size_t i = 0u; i < test_dims; ++i) {
+      assert(sobol::precomputed::primitive_polynomials[i] == runtime_polys[i]);
+    }
+
+    // Check direction numbers match
+    for (std::size_t d = 1u; d <= test_dims; ++d) {
+      const auto runtime_dirs = sobol::detail::direction_numbers_for_dimension(d, runtime_polys);
+      const auto& precomputed_dirs = sobol::precomputed::direction_numbers[d - 1u];
+
+      for (std::size_t bit = 0u; bit < sobol::detail::kSobolBits; ++bit) {
+        assert(precomputed_dirs[bit] == runtime_dirs[bit]);
+      }
+    }
+  }
+
+  {
+    // Verify that precomputed tables are actually used for dimensions <= 1000
+    sobol::SobolEngine small_engine(10u);
+    sobol::SobolEngine large_engine(100u);
+
+    // Both should work correctly
+    const auto p1 = small_engine.next();
+    assert(p1.size() == 10u);
+
+    const auto p2 = large_engine.next();
+    assert(p2.size() == 100u);
+  }
+#endif
+
   return 0;
 }

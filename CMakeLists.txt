@@ -5,6 +5,19 @@ add_library(sobol INTERFACE)
 target_include_directories(sobol INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_compile_features(sobol INTERFACE cxx_std_17)
 
+# Code generator for precomputed tables
+add_executable(generate_tables tools/generate_tables.cpp)
+target_link_libraries(generate_tables PRIVATE sobol)
+
+# Custom target to generate the precomputed tables header
+add_custom_target(generate_sobol_tables
+  COMMAND generate_tables ${CMAKE_CURRENT_SOURCE_DIR}/include/sobol/precomputed_tables.hpp
+  DEPENDS generate_tables
+  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+  COMMENT "Generating precomputed Sobol direction numbers and primitive polynomials"
+  VERBATIM
+)
+
 enable_testing()
 add_executable(test_sobol tests/test_sobol.cpp)
 target_link_libraries(test_sobol PRIVATE sobol)

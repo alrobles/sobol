@@ -10,6 +10,12 @@
 
 #include "sobol/primitive_polynomial.hpp"
 
+// Include precomputed tables if available
+// Users can define SOBOL_NO_PRECOMPUTED_TABLES to force runtime generation
+#ifndef SOBOL_NO_PRECOMPUTED_TABLES
+#include "sobol/precomputed_tables.hpp"
+#endif
+
 namespace sobol {
 namespace detail {
 
@@ -120,6 +126,19 @@ inline std::array<std::uint32_t, kSobolBits> direction_numbers_for_dimension(
 }
 
 inline std::vector<std::array<std::uint32_t, kSobolBits>> build_direction_table(std::size_t dimensions) {
+#ifndef SOBOL_NO_PRECOMPUTED_TABLES
+  // Use precomputed tables if dimensions are within range
+  if (dimensions <= precomputed::kMaxDimensions) {
+    std::vector<std::array<std::uint32_t, kSobolBits>> table;
+    table.reserve(dimensions);
+    for (std::size_t d = 0u; d < dimensions; ++d) {
+      table.push_back(precomputed::direction_numbers[d]);
+    }
+    return table;
+  }
+#endif
+  // Fall back to runtime generation for dimensions beyond precomputed range
+  // or if SOBOL_NO_PRECOMPUTED_TABLES is defined
   const auto primitive_polys = generate_primitive_polynomials(dimensions);
   std::vector<std::array<std::uint32_t, kSobolBits>> table;
   table.reserve(dimensions);
