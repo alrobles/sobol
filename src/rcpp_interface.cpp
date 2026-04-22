@@ -43,20 +43,34 @@ class SobolGenerator {
       : adapter_(validate_count(dimensions, "dim", false), validate_index(skip, "skip")) {}
 
   Rcpp::NumericVector next() {
-    const auto point = adapter_.next_point();
-    return Rcpp::NumericVector(point.begin(), point.end());
+    try {
+      const auto point = adapter_.next_point();
+      return Rcpp::NumericVector(point.begin(), point.end());
+    } catch (const std::exception& e) {
+      Rcpp::stop(std::string("SobolGenerator::next failed: ") + e.what());
+    }
   }
 
   Rcpp::NumericMatrix next_n(int n) {
-    const std::size_t count = validate_count(n, "n", true);
-    const std::size_t dimensions = adapter_.dimensions();
-    Rcpp::NumericMatrix out(static_cast<int>(count), static_cast<int>(dimensions));
-    const auto column_major = adapter_.next_points_column_major(count);
-    std::copy(column_major.begin(), column_major.end(), out.begin());
-    return out;
+    try {
+      const std::size_t count = validate_count(n, "n", true);
+      const std::size_t dimensions = adapter_.dimensions();
+      Rcpp::NumericMatrix out(static_cast<int>(count), static_cast<int>(dimensions));
+      const auto column_major = adapter_.next_points_column_major(count);
+      std::copy(column_major.begin(), column_major.end(), out.begin());
+      return out;
+    } catch (const std::exception& e) {
+      Rcpp::stop(std::string("SobolGenerator::next_n failed: ") + e.what());
+    }
   }
 
-  void skip_to(double point_index) { adapter_.skip_to(validate_index(point_index, "point_index")); }
+  void skip_to(double point_index) {
+    try {
+      adapter_.skip_to(validate_index(point_index, "point_index"));
+    } catch (const std::exception& e) {
+      Rcpp::stop(std::string("SobolGenerator::skip_to failed: ") + e.what());
+    }
+  }
 
   double index() const { return static_cast<double>(adapter_.index()); }
   int dimensions() const { return static_cast<int>(adapter_.dimensions()); }
