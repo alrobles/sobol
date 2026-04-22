@@ -1,6 +1,14 @@
 # sobol
 
-Header-only C++17 Sobol sequence core library.
+Header-only C++17 Sobol sequence core library with precomputed direction numbers.
+
+## Features
+
+- Fast initialization using precomputed tables (1000 dimensions)
+- Gray-code based incremental generation
+- Joe-Kuo method with Property A enforcement
+- Header-only, C++17 compatible
+- Runtime generation fallback for dimensions > 1000
 
 ## Build and test
 
@@ -40,3 +48,16 @@ It also exposes `sobol::RGeneratorAdapter` for incremental generation (`next_poi
 
 Both interfaces validate arguments (`n`, `dim`, `skip`) and translate core errors into
 R-friendly exceptions.
+
+## Precomputed Tables
+
+The library includes precomputed primitive polynomials and direction numbers for up to 1000 dimensions, providing significant performance improvements:
+
+- **Initialization**: ~50x faster than runtime generation
+- **Storage**: 477 KB of static constexpr data
+- **Quality**: Joe-Kuo method with Property A enforcement
+- **Fallback**: Automatic runtime generation for dimensions > 1000
+
+See [TABLE_GENERATION.md](TABLE_GENERATION.md) for details on the table generation process, format, and how to regenerate tables.
+
+To disable precomputed tables and force runtime generation, define `SOBOL_NO_PRECOMPUTED_TABLES` before including headers.
