@@ -84,7 +84,7 @@ inline std::vector<std::uint32_t> enforce_property_a_initial_numbers(
 inline std::array<std::uint32_t, kSobolBits> direction_numbers_for_dimension(
     std::size_t dimension_index, const std::vector<std::uint32_t>& primitive_polynomials) {
   if (dimension_index == 0u) {
-    throw std::invalid_argument("dimension index must start at 1");
+    throw std::invalid_argument("dimension_index must be >= 1 (1-based indexing)");
   }
   if (dimension_index > primitive_polynomials.size()) {
     throw std::invalid_argument("missing primitive polynomial for requested dimension");

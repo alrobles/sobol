@@ -68,8 +68,14 @@ int main() {
   }
 
   {
+    const auto points = sobol::sobol_points(4u, 2u, 3u);
     const auto column_major = sobol::sobol_points_column_major(4u, 2u, 3u);
     assert(column_major.size() == 8u);
+    for (std::size_t col = 0u; col < 2u; ++col) {
+      for (std::size_t row = 0u; row < 4u; ++row) {
+        assert(nearly_equal(column_major[col * 4u + row], points[row][col]));
+      }
+    }
   }
 
   return 0;

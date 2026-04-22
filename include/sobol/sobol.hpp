@@ -65,6 +65,9 @@ class SobolEngine {
 
  private:
   static std::size_t rightmost_zero_bit_position(std::uint64_t value) {
+    if (value == 0u) {
+      throw std::overflow_error("Sobol engine index overflowed 64-bit counter");
+    }
     std::size_t position = 0u;
     while ((value & 1u) == 0u) {
       ++position;

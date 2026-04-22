@@ -130,7 +130,7 @@ inline std::vector<std::uint32_t> generate_primitive_polynomials(std::size_t dim
     return result;
   }
 
-  for (int d = 2; result.size() < dimensions; ++d) {
+  for (int d = 2; d <= 30 && result.size() < dimensions; ++d) {
     const std::uint32_t start = (1u << static_cast<unsigned>(d)) | 1u;
     const std::uint32_t end = (1u << static_cast<unsigned>(d + 1));
     for (std::uint32_t poly = start; poly < end && result.size() < dimensions; poly += 2u) {
@@ -138,6 +138,10 @@ inline std::vector<std::uint32_t> generate_primitive_polynomials(std::size_t dim
         result.push_back(poly);
       }
     }
+  }
+
+  if (result.size() < dimensions) {
+    throw std::runtime_error("unable to generate enough primitive polynomials for requested dimensions");
   }
 
   return result;
