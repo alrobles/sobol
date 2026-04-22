@@ -1,0 +1,22 @@
+Package: sobol
+Type: Package
+Title: Sobol Sequence Generator
+Version: 0.1.0
+Authors@R: c(
+    person("Angel", "Robles", email = "alrobles@example.com", role = c("aut", "cre"))
+    )
+Description: Provides a fast and efficient implementation of Sobol sequence
+    generation for quasi-Monte Carlo methods. Includes both batch and incremental
+    interfaces with support for arbitrary starting indices and reproducible sequences.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends:
+    R (>= 3.5.0)
+Imports:
+    Rcpp (>= 1.0.0)
+LinkingTo:
+    Rcpp
+Suggests:
+    testthat (>= 3.0.0)
+RoxygenNote: 7.2.0
