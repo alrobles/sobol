@@ -4,7 +4,6 @@
 #include <array>
 #include <cstddef>
 #include <cstdint>
-#include <limits>
 #include <stdexcept>
 #include <vector>
 
@@ -31,15 +30,12 @@ class SobolEngine {
   std::uint64_t index() const noexcept { return index_; }
 
   std::vector<double> next() {
-    if (index_ > max_supported_index()) {
+    if (index_ == exhausted_index()) {
       throw std::overflow_error("Sobol engine index exceeded 32-bit direction number capacity");
     }
     const auto point = current_point();
-    if (index_ == std::numeric_limits<std::uint64_t>::max()) {
-      throw std::overflow_error("Sobol engine index overflowed 64-bit counter");
-    }
     if (index_ == max_supported_index()) {
-      ++index_;
+      index_ = exhausted_index();
       return point;
     }
     ++index_;
@@ -80,6 +76,10 @@ class SobolEngine {
  private:
   static constexpr std::uint64_t max_supported_index() {
     return (std::uint64_t{1} << detail::kSobolBits) - std::uint64_t{1};
+  }
+
+  static constexpr std::uint64_t exhausted_index() {
+    return max_supported_index() + std::uint64_t{1};
   }
 
   static std::size_t trailing_zero_count(std::uint64_t value) {
