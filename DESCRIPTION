@@ -1,6 +1,6 @@
 Package: sobol
 Type: Package
-Title: Sobol Sequence Generator
+Title: Quasi-Monte Carlo Sobol Sequence Generator
 Version: 0.1.0
 Authors@R: c(
     person("Angel", "Robles", email = "alrobles@example.com", role = c("aut", "cre")),
@@ -32,7 +32,6 @@ License: BSD_3_clause + file LICENSE
 URL: https://github.com/alrobles/sobol
 BugReports: https://github.com/alrobles/sobol/issues
 Encoding: UTF-8
-LazyData: true
 Depends:
     R (>= 3.5.0)
 Imports:
@@ -46,4 +45,4 @@ Suggests:
     ggplot2,
     microbenchmark
 VignetteBuilder: knitr
-RoxygenNote: 7.2.0
+RoxygenNote: 7.3.1

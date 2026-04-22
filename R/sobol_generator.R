@@ -33,6 +33,7 @@
 #' }
 #'
 #' @export
+#' @importFrom methods new
 sobol_generator <- function(dimensions, skip = 0) {
   # Validate inputs
   if (!is.numeric(dimensions) || length(dimensions) != 1 ||
@@ -99,7 +100,7 @@ sobol_next <- function(x, ...) {
   }
 
   tryCatch(
-    x$generator$next(),
+    x$generator$`next`(),
     error = function(e) {
       stop("Failed to generate next point: ", e$message)
     }

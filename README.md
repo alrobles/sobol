@@ -3,7 +3,7 @@
 [![C++ Tests](https://github.com/alrobles/sobol/actions/workflows/cpp-tests.yml/badge.svg)](https://github.com/alrobles/sobol/actions/workflows/cpp-tests.yml)
 [![R Package Tests](https://github.com/alrobles/sobol/actions/workflows/r-tests.yml/badge.svg)](https://github.com/alrobles/sobol/actions/workflows/r-tests.yml)
 
-Header-only C++17 Sobol sequence core library with precomputed direction numbers.
+Header-only C++17 Sobol sequence core library with precomputed direction numbers for quasi-Monte Carlo methods.
 
 ## Features
 
@@ -12,6 +12,20 @@ Header-only C++17 Sobol sequence core library with precomputed direction numbers
 - Joe-Kuo method with Property A enforcement
 - Header-only, C++17 compatible
 - Runtime generation fallback for dimensions > 1000
+
+## Credits and References
+
+This implementation is based on the work of:
+
+- **Ilya M. Sobol** - Original Sobol sequence algorithm (1967)
+- **Paul Bratley & Bennett L. Fox** - Algorithm implementation reference
+  - Bratley, P., & Fox, B. L. (1988). "Algorithm 659: Implementing Sobol's quasirandom sequence generator." *ACM Transactions on Mathematical Software*, 14(1), 88-100. DOI: [10.1145/42288.214372](https://doi.org/10.1145/42288.214372)
+- **Stephen Joe & Frances Y. Kuo** - Direction numbers and primitive polynomials
+  - Joe, S., & Kuo, F. Y. (2008). "Constructing Sobol sequences with better two-dimensional projections." *SIAM Journal on Scientific Computing*, 30(5), 2635-2654. DOI: [10.1145/1358628.1358630](https://doi.org/10.1145/1358628.1358630)
+
+## License
+
+This package is distributed under the BSD 3-Clause License. See the LICENSE file for details.
 
 ## Build and test
 
