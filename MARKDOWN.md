@@ -12,7 +12,7 @@ The implementation is a modular header-only C++17 library:
 - `include/sobol/sobol.hpp`
   - Gray-code incremental point generation (`next`) and direct `skip_to` logic.
 - `include/sobol/r_api.hpp`
-  - R-facing column-major adapter for Rcpp wrappers.
+  - R-facing column-major adapter and incremental adapter for Rcpp wrappers.
 
 ## Algorithm notes
 

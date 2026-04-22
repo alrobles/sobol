@@ -81,6 +81,51 @@ int main() {
   }
 
   {
+    sobol::RGeneratorAdapter adapter(2u, 5u);
+    sobol::SobolEngine engine(2u, 5u);
+    const auto adapter_point = adapter.next_point();
+    const auto engine_point = engine.next();
+    assert(adapter_point.size() == engine_point.size());
+    for (std::size_t i = 0u; i < adapter_point.size(); ++i) {
+      assert(nearly_equal(adapter_point[i], engine_point[i]));
+    }
+
+    const auto adapter_batch = adapter.next_points_column_major(3u);
+    assert(adapter_batch.size() == 6u);
+    for (std::size_t row = 0u; row < 3u; ++row) {
+      const auto point = engine.next();
+      for (std::size_t col = 0u; col < 2u; ++col) {
+        assert(nearly_equal(adapter_batch[col * 3u + row], point[col]));
+      }
+    }
+  }
+
+  {
+    const auto empty = sobol::sobol_points_column_major(0u, 2u);
+    assert(empty.empty());
+  }
+
+  {
+    bool threw = false;
+    try {
+      (void)sobol::sobol_points_column_major(4u, 0u);
+    } catch (const std::invalid_argument&) {
+      threw = true;
+    }
+    assert(threw);
+  }
+
+  {
+    bool threw = false;
+    try {
+      (void)sobol::checked_matrix_size((std::numeric_limits<std::size_t>::max() / 2u) + 1u, 2u);
+    } catch (const std::overflow_error&) {
+      threw = true;
+    }
+    assert(threw);
+  }
+
+  {
     sobol::SobolEngine engine(1u);
     bool threw = false;
     try {
