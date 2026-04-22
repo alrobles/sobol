@@ -1,6 +1,8 @@
 #include <cassert>
 #include <cmath>
 #include <cstdint>
+#include <limits>
+#include <stdexcept>
 #include <vector>
 
 #include "sobol/direction_numbers.hpp"
@@ -76,6 +78,18 @@ int main() {
         assert(nearly_equal(column_major[col * 4u + row], points[row][col]));
       }
     }
+  }
+
+  {
+    sobol::SobolEngine engine(1u);
+    engine.skip_to(std::numeric_limits<std::uint64_t>::max());
+    bool threw = false;
+    try {
+      (void)engine.next();
+    } catch (const std::overflow_error&) {
+      threw = true;
+    }
+    assert(threw);
   }
 
   return 0;

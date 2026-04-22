@@ -4,6 +4,7 @@
 #include <array>
 #include <cstddef>
 #include <cstdint>
+#include <limits>
 #include <stdexcept>
 #include <vector>
 
@@ -31,6 +32,9 @@ class SobolEngine {
 
   std::vector<double> next() {
     const auto point = current_point();
+    if (index_ == std::numeric_limits<std::uint64_t>::max()) {
+      throw std::overflow_error("Sobol engine index overflowed 64-bit counter");
+    }
     ++index_;
     const auto bit = rightmost_zero_bit_position(index_);
     for (std::size_t d = 0u; d < dimensions_; ++d) {
@@ -66,7 +70,7 @@ class SobolEngine {
  private:
   static std::size_t rightmost_zero_bit_position(std::uint64_t value) {
     if (value == 0u) {
-      throw std::overflow_error("Sobol engine index overflowed 64-bit counter");
+      throw std::invalid_argument("rightmost_zero_bit_position expects non-zero input");
     }
     std::size_t position = 0u;
     while ((value & 1u) == 0u) {
