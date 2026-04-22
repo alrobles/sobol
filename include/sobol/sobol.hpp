@@ -36,7 +36,7 @@ class SobolEngine {
       throw std::overflow_error("Sobol engine index overflowed 64-bit counter");
     }
     ++index_;
-    const auto bit = rightmost_zero_bit_position(index_);
+    const auto bit = rightmost_zero_bit_index(index_);
     for (std::size_t d = 0u; d < dimensions_; ++d) {
       state_[d] ^= direction_table_[d][bit];
     }
@@ -68,9 +68,9 @@ class SobolEngine {
   }
 
  private:
-  static std::size_t rightmost_zero_bit_position(std::uint64_t value) {
+  static std::size_t rightmost_zero_bit_index(std::uint64_t value) {
     if (value == 0u) {
-      throw std::invalid_argument("rightmost_zero_bit_position expects non-zero input");
+      throw std::invalid_argument("rightmost_zero_bit_index expects non-zero input");
     }
     std::size_t position = 0u;
     while ((value & 1u) == 0u) {

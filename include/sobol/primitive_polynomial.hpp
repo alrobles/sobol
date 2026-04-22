@@ -64,17 +64,17 @@ inline std::uint32_t pow_mod(std::uint32_t base, std::uint64_t exp,
 
 inline std::vector<std::uint32_t> prime_factors(std::uint32_t n) {
   std::vector<std::uint32_t> factors;
-  std::uint32_t value = n;
-  for (std::uint32_t d = 2u; d * d <= value; ++d) {
-    if (value % d == 0u) {
+  std::uint32_t remaining = n;
+  for (std::uint32_t d = 2u; d * d <= remaining; ++d) {
+    if (remaining % d == 0u) {
       factors.push_back(d);
-      while (value % d == 0u) {
-        value /= d;
+      while (remaining % d == 0u) {
+        remaining /= d;
       }
     }
   }
-  if (value > 1u) {
-    factors.push_back(value);
+  if (remaining > 1u) {
+    factors.push_back(remaining);
   }
   return factors;
 }
