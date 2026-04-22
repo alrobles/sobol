@@ -101,6 +101,16 @@ int main() {
   }
 
   {
+    bool threw = false;
+    try {
+      (void)sobol::RGeneratorAdapter(0u);
+    } catch (const std::invalid_argument&) {
+      threw = true;
+    }
+    assert(threw);
+  }
+
+  {
     const auto empty = sobol::sobol_points_column_major(0u, 2u);
     assert(empty.empty());
   }

@@ -11,11 +11,11 @@
 
 namespace {
 
-std::size_t validate_count(int value, const char* name, bool allow_zero) {
+std::size_t validate_count(int value, const char* name, bool zero_allowed) {
   if (value < 0) {
     throw std::invalid_argument(std::string(name) + " must be non-negative");
   }
-  if (!allow_zero && value == 0) {
+  if (!zero_allowed && value == 0) {
     throw std::invalid_argument(std::string(name) + " must be greater than zero");
   }
   return static_cast<std::size_t>(value);
