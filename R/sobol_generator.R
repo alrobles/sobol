@@ -35,12 +35,14 @@
 #' @export
 sobol_generator <- function(dimensions, skip = 0) {
   # Validate inputs
-  if (!is.numeric(dimensions) || length(dimensions) != 1 || dimensions <= 0 ||
+  if (!is.numeric(dimensions) || length(dimensions) != 1 ||
+      !is.finite(dimensions) || dimensions <= 0 ||
       dimensions != floor(dimensions)) {
     stop("'dimensions' must be a positive integer")
   }
 
-  if (!is.numeric(skip) || length(skip) != 1 || skip < 0 || skip != floor(skip)) {
+  if (!is.numeric(skip) || length(skip) != 1 ||
+      !is.finite(skip) || skip < 0 || skip != floor(skip)) {
     stop("'skip' must be a non-negative integer")
   }
 
@@ -130,7 +132,7 @@ sobol_next_n <- function(x, n, ...) {
     stop("'x' must be a sobol_generator object")
   }
 
-  if (!is.numeric(n) || length(n) != 1 || n < 0 || n != floor(n)) {
+  if (!is.numeric(n) || length(n) != 1 || !is.finite(n) || n < 0 || n != floor(n)) {
     stop("'n' must be a non-negative integer")
   }
 
@@ -171,7 +173,7 @@ sobol_skip_to <- function(x, index, ...) {
     stop("'x' must be a sobol_generator object")
   }
 
-  if (!is.numeric(index) || length(index) != 1 || index < 0 || index != floor(index)) {
+  if (!is.numeric(index) || length(index) != 1 || !is.finite(index) || index < 0 || index != floor(index)) {
     stop("'index' must be a non-negative integer")
   }
 
@@ -272,9 +274,8 @@ print.sobol_generator <- function(x, ...) {
 
   if (!is.na(current_idx)) {
     cat(sprintf("  Current index: %g\n", current_idx))
+    cat(sprintf("  Points generated: %g\n", current_idx - x$initial_skip))
   }
-
-  cat(sprintf("  Points generated: %g\n", current_idx - x$initial_skip))
 
   invisible(x)
 }
