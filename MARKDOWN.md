@@ -1,4 +1,4 @@
-# Sobol Implementation
+# Introduction
 
 ## Core design
 
@@ -21,7 +21,7 @@ The implementation is a modular header-only C++17 library:
 3. Property A is enforced on initial direction numbers by requiring full rank over GF(2).
 4. Successive points are produced in O(dimensions) using the rightmost-zero-bit update rule.
 
-## Usage
+# Mathematical Foundations
 
 Use `<sobol/sobol.hpp>` for standalone C++ usage and `<sobol/r_api.hpp>` when exposing the
 sequence through an Rcpp interface.
