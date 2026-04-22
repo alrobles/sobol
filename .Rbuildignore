@@ -1,0 +1,9 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.github$
+^CMakeLists\.txt$
+^build$
+^tests/test_sobol.*\.cpp$
+^tools$
+^scripts$
+^.*\.md$
