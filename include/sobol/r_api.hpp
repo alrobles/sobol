@@ -12,7 +12,7 @@
 namespace sobol {
 
 inline std::size_t checked_matrix_size(std::size_t n, std::size_t dimensions) {
-  if (dimensions != 0u && n > (std::numeric_limits<std::size_t>::max() / dimensions)) {
+  if (dimensions != 0u && n > std::numeric_limits<std::size_t>::max() / dimensions) {
     throw std::overflow_error("requested matrix size overflows size_t");
   }
   return n * dimensions;

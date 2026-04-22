@@ -68,8 +68,8 @@ class SobolGenerator {
 }  // namespace
 
 // Generate an n x dim Sobol matrix.
-// [[Rcpp::export(name = "sobol_points")]]
-Rcpp::NumericMatrix sobol_points_rcpp(int n, int dim, double skip = 0.0) {
+// [[Rcpp::export]]
+Rcpp::NumericMatrix sobol_points(int n, int dim, double skip = 0.0) {
   try {
     const std::size_t count = validate_count(n, "n", true);
     const std::size_t dimensions = validate_count(dim, "dim", false);
