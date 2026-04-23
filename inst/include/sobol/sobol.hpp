@@ -37,6 +37,14 @@
 #include <stdexcept>
 #include <vector>
 
+// Optimization: Use compiler intrinsics for trailing zero count
+#if defined(__GNUC__) || defined(__clang__)
+#define SOBOL_HAS_BUILTIN_CTZ 1
+#elif defined(_MSC_VER)
+#include <intrin.h>
+#define SOBOL_HAS_MSVC_INTRINSICS 1
+#endif
+
 #include "sobol/direction_numbers.hpp"
 
 namespace sobol {
@@ -69,9 +77,13 @@ class SobolEngine {
       return point;
     }
     ++index_;
-    const auto bit = trailing_zero_count(index_);
-    for (std::size_t d = 0u; d < dimensions_; ++d) {
-      state_[d] ^= direction_table_[d][bit];
+    const auto bit = trailing_zero_count_fast(index_);
+
+    // Optimization: Use pointer arithmetic for better vectorization
+    const std::size_t dims = dimensions_;
+    std::uint32_t* state_ptr = state_.data();
+    for (std::size_t d = 0u; d < dims; ++d) {
+      state_ptr[d] ^= direction_table_[d][bit];
     }
     return point;
   }
@@ -83,22 +95,38 @@ class SobolEngine {
     index_ = point_index;
     const std::uint64_t gray = point_index ^ (point_index >> 1u);
 
-    for (std::size_t d = 0u; d < dimensions_; ++d) {
+    const std::size_t dims = dimensions_;
+    std::uint32_t* state_ptr = state_.data();
+
+    // Optimization: Process bits more efficiently
+    for (std::size_t d = 0u; d < dims; ++d) {
       std::uint32_t value = 0u;
-      for (std::size_t bit = 0u; bit < detail::kSobolBits; ++bit) {
-        if (((gray >> bit) & 1u) != 0u) {
+      std::uint64_t gray_bits = gray;
+      std::size_t bit = 0u;
+
+      // Optimization: Skip trailing zeros in gray code
+      while (gray_bits != 0u) {
+        if ((gray_bits & 1u) != 0u) {
           value ^= direction_table_[d][bit];
         }
+        gray_bits >>= 1u;
+        ++bit;
       }
-      state_[d] = value;
+      state_ptr[d] = value;
     }
   }
 
   std::vector<double> current_point() const {
     static constexpr double inv_pow2_32 = 1.0 / 4294967296.0;
     std::vector<double> point(dimensions_);
-    for (std::size_t d = 0u; d < dimensions_; ++d) {
-      point[d] = static_cast<double>(state_[d]) * inv_pow2_32;
+
+    // Optimization: Use pointer arithmetic and hint for vectorization
+    const std::size_t dims = dimensions_;
+    const std::uint32_t* state_ptr = state_.data();
+    double* point_ptr = point.data();
+
+    for (std::size_t d = 0u; d < dims; ++d) {
+      point_ptr[d] = static_cast<double>(state_ptr[d]) * inv_pow2_32;
     }
     return point;
   }
@@ -112,15 +140,32 @@ class SobolEngine {
     return max_supported_index() + std::uint64_t{1};
   }
 
-  static std::size_t trailing_zero_count(std::uint64_t value) {
-    if (value == 0u) {
-      throw std::invalid_argument("trailing_zero_count expects non-zero input");
-    }
+  // Optimization: Use compiler intrinsics for trailing zero count
+  static inline std::size_t trailing_zero_count_fast(std::uint64_t value) noexcept {
+#if defined(SOBOL_HAS_BUILTIN_CTZ)
+    // GCC/Clang builtin: __builtin_ctzll is much faster than the loop
+    return static_cast<std::size_t>(__builtin_ctzll(value));
+#elif defined(SOBOL_HAS_MSVC_INTRINSICS)
+    // MSVC intrinsic
+    unsigned long index;
+    _BitScanForward64(&index, value);
+    return static_cast<std::size_t>(index);
+#else
+    // Fallback: manual loop
     std::size_t position = 0u;
     while ((value & 1u) == 0u) {
       ++position;
       value >>= 1u;
     }
+    return position;
+#endif
+  }
+
+  static std::size_t trailing_zero_count(std::uint64_t value) {
+    if (value == 0u) {
+      throw std::invalid_argument("trailing_zero_count expects non-zero input");
+    }
+    const std::size_t position = trailing_zero_count_fast(value);
     if (position >= detail::kSobolBits) {
       throw std::overflow_error("Sobol engine index exceeded 32-bit direction number capacity");
     }
