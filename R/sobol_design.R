@@ -100,6 +100,6 @@ corresponding elements of 'upper'"
   )
 
   # Convert to data frame with proper column names
-  colnames(scaled) <- lnames
+  colnames(scaled) <- names(lower)
   as.data.frame(scaled)
 }

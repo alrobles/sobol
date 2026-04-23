@@ -45,6 +45,7 @@ Suggests:
     knitr,
     rmarkdown,
     ggplot2,
-    microbenchmark
+    microbenchmark,
+    pomp
 VignetteBuilder: knitr
 RoxygenNote: 7.3.3
