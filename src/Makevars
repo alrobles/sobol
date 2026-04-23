@@ -1,3 +1,1 @@
 PKG_CPPFLAGS = -I../inst/include
-# Optimization flags for better performance
-PKG_CXXFLAGS = -O3 -march=native -mtune=native -ffast-math -funroll-loops

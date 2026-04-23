@@ -15,16 +15,20 @@ knitr::opts_chunk$set(
 
 # Sobol Sequence Generator - R Package
 
-An efficient R implementation of Sobol sequence generation for quasi-Monte Carlo methods. This package provides both batch and incremental interfaces with full support for reproducibility and state management.
+An efficient R implementation of Sobol sequence generation for
+quasi-Monte Carlo methods. This package provides both batch and incremental
+interfaces with full support for reproducibility and state management.
 
 ## Features
 
-- **Fast C++ Implementation**: Core algorithms implemented in modern C++ for maximum performance
-- **S3 Interface**: Idiomatic R interface with S3 classes and methods
-- **Incremental Generation**: Maintain state across calls for efficient point generation
+- **`sobol_design()`**: instant parameter grid with intuitive lower/upper bounds
+- **Fast C++ engine**: core algorithms in C++17, exposed via Rcpp
+- **Reproducibility**: deterministic sequences with skip‑ahead support for parallel workflows
+- **Incremental Generation**:  generate points one‑by‑one or in batches
 - **Batch Generation**: Generate large matrices of points in a single call
 - **Reproducibility**: Skip to arbitrary indices for reproducible subsequences
 - **Full Documentation**: Comprehensive documentation with examples
+- **Comprehensive test**: Test valiting mathematical correctness
 
 ## Installation
 
@@ -34,8 +38,98 @@ devtools::install_github("alrobles/sobol")
 ```
 
 ## Quick Start
+The most common task is to explore a high‑dimensional parameter region before running an optimiser.
+sobol_design() returns a data frame of scaled points that you can feed directly to your objective function.
+```r
+library(sobol)
 
-### Batch Generation
+# Define ranges for three fake hyperparameters
+design <- sobol_design(
+  lower = c(learning_rate = 0.0001, momentum = 0.00, dropout = 0.0),
+  upper = c(learning_rate = 0.1000, momentum = 0.99, dropout = 0.5),
+  nseq   = 200
+)
+
+head(design)
+```
+The design fills the space more evenly than random sampling – a key advantage
+for global optimization.
+
+### Going Deeper: Raw Points and Stateful Generation
+
+sobol_design() is a convenience layer built on top of two lower‑level backends.
+You can use them directly when you need raw (un‑scaled) points or incremental
+control.
+
+### Raw point matrices with sobol_points()
+```r
+mat <- sobol_points(n = 512, dim = 4)   # 512×4 matrix in [0,1)
+```
+
+### Stateful generator with sobol_generator()
+
+```r
+gen <- sobol_generator(dim = 2, skip = 1000)
+pt  <- sobol_next(gen)                  # vector of length 2
+batch <- sobol_next_n(gen, n = 100)     # 100×2 matrix
+
+# Jump to any index (0‑based)
+sobol_skip_to(gen, 2048)
+sobol_index(gen)                        # current position
+```
+
+The generator is perfect for interleaved generation (generate a few points,
+evaluate, generate more) and for parallel scouts that each handle a
+non‑overlapping segment of the sequence.
+
+### Reproducibility and Parallel Workflows
+
+Sobol sequences are fully deterministic.
+Identical parameters always yield identical points.
+
+For parallel optimisation or multi‑node sampling, use skipping to partition the
+sequence:
+
+
+```r
+# Worker 1 handles points 0–999
+w1 <- sobol_points(n = 1000, dim = 3, skip = 0)
+
+# Worker 2 handles points 1000–1999
+w2 <- sobol_points(n = 1000, dim = 3, skip = 1000)
+```
+No coordination between workers – just choose non‑overlapping skip offsets.
+
+
+
+
+### Performance
+
+The library is heavily optimised:
+
+- Compiler intrinsics for trailing‑zero count (GCC/Clang/MSVC)
+- Column‑major layout for direct R matrix integration
+- Even 1 million points in 10 dimensions execute in under a second on modern
+hardware.
+
+### Reference at a glance
+| Function | Purpose | Output |
+|----------|---------|--------|
+| `sobol_design(lower, upper, nseq)` | Scaled parameter design (recommended entry point) | data frame |
+| `sobol_points(n, dim, skip = 0)` | Raw Sobol matrix in [0,1) | numeric matrix |
+| `sobol_generator(dim, skip = 0)` | Stateful generator object | S3 `sobol_generator` |
+| `sobol_next(x)` | Next single point | numeric vector |
+| `sobol_next_n(x, n)` | Next *n* points | numeric matrix |
+| `sobol_skip_to(x, index)` | Jump to index | invisible(x) |
+| `sobol_index(x)` | Current index | numeric |
+| `sobol_dimensions(x)` | Number of dimensions | integer |
+
+
+```r
+a <- sobol_design(lower = c(p = 0), upper = c(p = 1), nseq = 64)
+b <- sobol_design(lower = c(p = 0), upper = c(p = 1), nseq = 64)
+identical(a, b)   # TRUE
+```
 
 Generate a matrix of Sobol points in one call:
 

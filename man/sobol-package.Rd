@@ -6,7 +6,7 @@
 \alias{sobol-package}
 \title{sobol: Quasi-Monte Carlo Sobol Sequence Generator}
 \description{
-Provides a fast and efficient implementation of Sobol sequences for quasi-Monte Carlo methods. The Sobol sequence is a low-discrepancy sequence with the property that for all values of N, its subsequence x1, ..., xN has a low discrepancy. It can be used to generate quasi-random numbers for use in Monte Carlo integration and other simulation methods. This implementation is based on the algorithms described by Bratley and Fox (1988) \doi{10.1145/42288.214372} and uses direction numbers from Joe and Kuo (2008) \doi{10.1145/1358628.1358630}. The package includes both batch and incremental interfaces with support for arbitrary starting indices and reproducible sequences. It uses 'Rcpp' for efficient C++ integration.
+Provides a fast and efficient implementation of Sobol sequences for quasi-Monte Carlo methods. The Sobol sequence is a low-discrepancy sequence with the property that for all values of N, its subsequence x1, ..., xN has a low discrepancy. It can be used to generate quasi-random numbers for use in Monte Carlo integration and other simulation methods. This implementation is based on the algorithms described by Bratley and Fox (1988) \doi{10.1145/42288.214372} and uses direction numbers from Joe and Kuo (2008) \doi{10.1145/1358628.1358630}. The package includes both batch and incremental interfaces with support for arbitrary starting indices and reproducible sequences. It uses 'Rcpp' for efficient 'C++' integration.
 }
 \seealso{
 Useful links:
