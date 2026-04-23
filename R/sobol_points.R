@@ -4,15 +4,16 @@
 #' convenience function that does not maintain state between calls.
 #' For incremental generation, use \code{\link{sobol_generator}} instead.
 #'
+#' @name sobol_points
 #' @param n Integer, the number of points to generate. Must be non-negative.
-#' @param dimensions Integer, the number of dimensions for each point.
+#' @param dim Integer, the number of dimensions for each point.
 #'   Must be a positive integer.
 #' @param skip Numeric, the number of initial points to skip (default: 0).
 #'   This allows generating subsequences of the Sobol sequence.
 #'
-#' @return A numeric matrix with n rows and dimensions columns, where each
+#' @return A numeric matrix with n rows and dim columns, where each
 #'   row represents a point in the Sobol sequence. Values are in [0, 1).
-#'   If n = 0, returns a 0 x dimensions matrix.
+#'   If n = 0, returns a 0 x dim matrix.
 #'
 #' @details
 #' This function is implemented directly in C++ via Rcpp and is more
@@ -30,14 +31,14 @@
 #' @examples
 #' \dontrun{
 #' # Generate 1000 points in 5 dimensions
-#' points <- sobol_points(n = 1000, dimensions = 5)
+#' points <- sobol_points(n = 1000, dim = 5)
 #' dim(points)  # [1] 1000    5
 #'
 #' # Skip the first 100 points
-#' points_skipped <- sobol_points(n = 100, dimensions = 2, skip = 100)
+#' points_skipped <- sobol_points(n = 100, dim = 2, skip = 100)
 #'
 #' # Empty result
-#' empty <- sobol_points(n = 0, dimensions = 3)
+#' empty <- sobol_points(n = 0, dim = 3)
 #' dim(empty)  # [1] 0 3
 #' }
 #'
