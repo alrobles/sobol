@@ -31,6 +31,11 @@ then scales each dimension to the specified parameter ranges. The Sobol
 sequence is generated using the Joe-Kuo direction numbers with Property A
 enforcement, providing excellent low-discrepancy properties.
 
+Following the recommendation of Joe & Kuo (2003) and the implementation
+in pomp-explore, this function skips the first k points of the Sobol
+sequence, where k is the largest power of 2 smaller than nseq. This
+improves the uniformity properties of the generated design.
+
 The function is designed to be API-compatible with the \code{sobol_design}
 function from the pomp-explore package, allowing for easy comparison and
 drop-in replacement.

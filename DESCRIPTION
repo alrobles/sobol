@@ -21,7 +21,7 @@ Description: Provides a fast and efficient implementation of Sobol sequences
     The package includes both batch and incremental interfaces with support
     for arbitrary starting indices and reproducible sequences. It uses 'Rcpp'
     for efficient 'C++' integration.
-URL: <https://alrobles.github.io/sobol>
+URL: <https://alrobles.github.io/sobol>, https://alrobles.github.io/sobol/
 BugReports: https://github.com/alrobles/sobol/issues
 Encoding: UTF-8
 Depends:
