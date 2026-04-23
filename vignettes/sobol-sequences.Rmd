@@ -101,9 +101,10 @@ points <- sobol_next_n(gen, n = 1000)
 
 # Visualize the coverage
 plot(points[, 1], points[, 2],
-     pch = 20, cex = 0.5,
-     main = "Sobol Sequence Coverage (2D)",
-     xlab = "Dimension 1", ylab = "Dimension 2")
+  pch = 20, cex = 0.5,
+  main = "Sobol Sequence Coverage (2D)",
+  xlab = "Dimension 1", ylab = "Dimension 2"
+)
 ```
 
 ## Comparison with Random Sampling
@@ -121,14 +122,16 @@ random_points <- matrix(runif(2000), ncol = 2)
 # Plot comparison
 par(mfrow = c(1, 2))
 plot(sobol_points[, 1], sobol_points[, 2],
-     pch = 20, cex = 0.5,
-     main = "Sobol Sequence (n=1000)",
-     xlab = "Dimension 1", ylab = "Dimension 2")
+  pch = 20, cex = 0.5,
+  main = "Sobol Sequence (n=1000)",
+  xlab = "Dimension 1", ylab = "Dimension 2"
+)
 
 plot(random_points[, 1], random_points[, 2],
-     pch = 20, cex = 0.5,
-     main = "Random Sampling (n=1000)",
-     xlab = "Dimension 1", ylab = "Dimension 2")
+  pch = 20, cex = 0.5,
+  main = "Random Sampling (n=1000)",
+  xlab = "Dimension 1", ylab = "Dimension 2"
+)
 par(mfrow = c(1, 1))
 ```
 
@@ -141,7 +144,7 @@ Sobol sequences can significantly improve the accuracy of Monte Carlo integratio
 ```{r integration}
 # Function to integrate: f(x, y) = x^2 + y^2 over [0,1]^2
 # True value: 2/3
-true_value <- 2/3
+true_value <- 2 / 3
 
 # Monte Carlo integration using random sampling
 mc_random <- function(n) {
@@ -162,14 +165,18 @@ random_errors <- sapply(sample_sizes, function(n) abs(mc_random(n) - true_value)
 sobol_errors <- sapply(sample_sizes, function(n) abs(qmc_sobol(n) - true_value))
 
 # Plot convergence
-plot(sample_sizes, random_errors, type = "b", log = "xy",
-     col = "red", pch = 19,
-     main = "Convergence Comparison",
-     xlab = "Sample Size (n)", ylab = "Absolute Error",
-     ylim = range(c(random_errors, sobol_errors)))
+plot(sample_sizes, random_errors,
+  type = "b", log = "xy",
+  col = "red", pch = 19,
+  main = "Convergence Comparison",
+  xlab = "Sample Size (n)", ylab = "Absolute Error",
+  ylim = range(c(random_errors, sobol_errors))
+)
 lines(sample_sizes, sobol_errors, type = "b", col = "blue", pch = 19)
-legend("topright", c("Random", "Sobol"), col = c("red", "blue"),
-       pch = 19, lty = 1)
+legend("topright", c("Random", "Sobol"),
+  col = c("red", "blue"),
+  pch = 19, lty = 1
+)
 ```
 
 ## High-Dimensional Applications
@@ -186,9 +193,10 @@ cat("Generated", nrow(points_10d), "points in", ncol(points_10d), "dimensions\n"
 
 # Examine coverage in first two dimensions
 plot(points_10d[, 1], points_10d[, 2],
-     pch = 20, cex = 0.5,
-     main = "10D Sobol Sequence (Projection to 2D)",
-     xlab = "Dimension 1", ylab = "Dimension 2")
+  pch = 20, cex = 0.5,
+  main = "10D Sobol Sequence (Projection to 2D)",
+  xlab = "Dimension 1", ylab = "Dimension 2"
+)
 ```
 
 ## Performance Considerations

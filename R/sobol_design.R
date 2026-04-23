@@ -83,7 +83,7 @@ sobol_design <- function(lower = numeric(0), upper = numeric(0), nseq) {
   }
 
   if (!is.numeric(nseq) || length(nseq) != 1 || !is.finite(nseq) ||
-      nseq <= 0 || nseq != floor(nseq)) {
+    nseq <= 0 || nseq != floor(nseq)) {
     stop("'nseq' must be a positive integer")
   }
 

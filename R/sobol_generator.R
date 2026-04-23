@@ -37,13 +37,13 @@
 sobol_generator <- function(dimensions, skip = 0) {
   # Validate inputs
   if (!is.numeric(dimensions) || length(dimensions) != 1 ||
-      !is.finite(dimensions) || dimensions <= 0 ||
-      dimensions != floor(dimensions)) {
+    !is.finite(dimensions) || dimensions <= 0 ||
+    dimensions != floor(dimensions)) {
     stop("'dimensions' must be a positive integer")
   }
 
   if (!is.numeric(skip) || length(skip) != 1 ||
-      !is.finite(skip) || skip < 0 || skip != floor(skip)) {
+    !is.finite(skip) || skip < 0 || skip != floor(skip)) {
     stop("'skip' must be a non-negative integer")
   }
 
@@ -90,7 +90,7 @@ sobol_generator <- function(dimensions, skip = 0) {
 #' \dontrun{
 #' gen <- sobol_generator(dimensions = 3)
 #' point <- sobol_next(gen)
-#' print(point)  # e.g., [0.5, 0.5, 0.5]
+#' print(point) # e.g., [0.5, 0.5, 0.5]
 #' }
 #'
 #' @export
@@ -124,7 +124,7 @@ sobol_next <- function(x, ...) {
 #' \dontrun{
 #' gen <- sobol_generator(dimensions = 2)
 #' points <- sobol_next_n(gen, n = 10)
-#' print(dim(points))  # [1] 10  2
+#' print(dim(points)) # [1] 10  2
 #' }
 #'
 #' @export
@@ -165,7 +165,7 @@ sobol_next_n <- function(x, n, ...) {
 #' \dontrun{
 #' gen <- sobol_generator(dimensions = 2)
 #' sobol_skip_to(gen, 100)
-#' point <- sobol_next(gen)  # This is the 100th point (0-indexed)
+#' point <- sobol_next(gen) # This is the 100th point (0-indexed)
 #' }
 #'
 #' @export
@@ -207,7 +207,7 @@ sobol_skip_to <- function(x, index, ...) {
 #' sobol_next(gen)
 #' sobol_next(gen)
 #' idx <- sobol_index(gen)
-#' print(idx)  # 2
+#' print(idx) # 2
 #' }
 #'
 #' @export
@@ -237,7 +237,7 @@ sobol_index <- function(x, ...) {
 #' \dontrun{
 #' gen <- sobol_generator(dimensions = 5)
 #' dims <- sobol_dimensions(gen)
-#' print(dims)  # 5
+#' print(dims) # 5
 #' }
 #'
 #' @export

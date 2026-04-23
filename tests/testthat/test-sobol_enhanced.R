@@ -352,7 +352,7 @@ test_that("first point is all zeros", {
 test_that("second point is all 0.5s", {
   for (dim in c(1, 2, 3, 5, 10)) {
     gen <- sobol_generator(dimensions = dim)
-    sobol_next(gen)  # Skip first point
+    sobol_next(gen) # Skip first point
     second_point <- sobol_next(gen)
     expect_equal(second_point, rep(0.5, dim), tolerance = 1e-10)
   }
