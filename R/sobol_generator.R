@@ -36,16 +36,8 @@
 #' @importFrom methods new
 sobol_generator <- function(dimensions, skip = 0) {
   # Validate inputs
-  if (!is.numeric(dimensions) || length(dimensions) != 1 ||
-        !is.finite(dimensions) || dimensions <= 0 ||
-        dimensions != floor(dimensions)) {
-    stop("'dimensions' must be a positive integer")
-  }
-
-  if (!is.numeric(skip) || length(skip) != 1 ||
-        !is.finite(skip) || skip < 0 || skip != floor(skip)) {
-    stop("'skip' must be a non-negative integer")
-  }
+  checkmate::assert_int(dimensions, lower = 1)
+  checkmate::assert_int(skip, lower = 0)
 
   # Convert to integer types for R
   dimensions <- as.integer(dimensions)
@@ -95,9 +87,7 @@ sobol_generator <- function(dimensions, skip = 0) {
 #'
 #' @export
 sobol_next <- function(x, ...) {
-  if (!inherits(x, "sobol_generator")) {
-    stop("'x' must be a sobol_generator object")
-  }
+  checkmate::assert_class(x, "sobol_generator")
 
   tryCatch(
     x$generator$`next`(),
@@ -129,14 +119,8 @@ sobol_next <- function(x, ...) {
 #'
 #' @export
 sobol_next_n <- function(x, n, ...) {
-  if (!inherits(x, "sobol_generator")) {
-    stop("'x' must be a sobol_generator object")
-  }
-
-  if (!is.numeric(n) || length(n) != 1 || !is.finite(n) || n < 0 ||
-        n != floor(n)) {
-    stop("'n' must be a non-negative integer")
-  }
+  checkmate::assert_class(x, "sobol_generator")
+  checkmate::assert_int(n, lower = 0)
 
   n <- as.integer(n)
 
@@ -171,14 +155,8 @@ sobol_next_n <- function(x, n, ...) {
 #'
 #' @export
 sobol_skip_to <- function(x, index, ...) {
-  if (!inherits(x, "sobol_generator")) {
-    stop("'x' must be a sobol_generator object")
-  }
-
-  if (!is.numeric(index) || length(index) != 1 || !is.finite(index) || index < 0
-      || index != floor(index)) {
-    stop("'index' must be a non-negative integer")
-  }
+  checkmate::assert_class(x, "sobol_generator")
+  checkmate::assert_number(index, lower = 0, finite = TRUE)
 
   index <- as.numeric(index)
 
@@ -214,9 +192,7 @@ sobol_skip_to <- function(x, index, ...) {
 #'
 #' @export
 sobol_index <- function(x, ...) {
-  if (!inherits(x, "sobol_generator")) {
-    stop("'x' must be a sobol_generator object")
-  }
+  checkmate::assert_class(x, "sobol_generator")
 
   tryCatch(
     x$generator$index(),
@@ -244,9 +220,7 @@ sobol_index <- function(x, ...) {
 #'
 #' @export
 sobol_dimensions <- function(x, ...) {
-  if (!inherits(x, "sobol_generator")) {
-    stop("'x' must be a sobol_generator object")
-  }
+  checkmate::assert_class(x, "sobol_generator")
 
   tryCatch(
     x$generator$dimensions(),

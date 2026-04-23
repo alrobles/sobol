@@ -42,54 +42,54 @@ test_that("sobol_design validates inputs", {
   # Length mismatch
   expect_error(
     sobol_design(lower = c(a = 0), upper = c(a = 1, b = 2), nseq = 10),
-    "must have same length"
+    "length"
   )
 
   # Missing names
   expect_error(
     sobol_design(lower = c(0, 1), upper = c(1, 2), nseq = 10),
-    "must be named vectors"
+    "named"
   )
 
   # Name mismatch
   expect_error(
     sobol_design(lower = c(a = 0, b = 1), upper = c(a = 1, c = 2), nseq = 10),
-    "names.*must match"
+    "names"
   )
 
   # Invalid nseq
   expect_error(
     sobol_design(lower = c(a = 0), upper = c(a = 1), nseq = -1),
-    "positive integer"
+    "nseq"
   )
 
   expect_error(
     sobol_design(lower = c(a = 0), upper = c(a = 1), nseq = 1.5),
-    "positive integer"
+    "nseq"
   )
 
   # Too many points
   expect_error(
     sobol_design(lower = c(a = 0), upper = c(a = 1), nseq = 2^30 + 1),
-    "too many points"
+    "nseq"
   )
 
   # Empty vectors
   expect_error(
     sobol_design(lower = numeric(0), upper = numeric(0), nseq = 10),
-    "must not be empty"
+    "min.len"
   )
 
   # Lower >= upper
   expect_error(
     sobol_design(lower = c(a = 1), upper = c(a = 0), nseq = 10),
-    "lower.*must be less than"
+    "lower.*less than"
   )
 
   # Non-finite values
   expect_error(
     sobol_design(lower = c(a = 0), upper = c(a = Inf), nseq = 10),
-    "finite values"
+    "finite"
   )
 })
 

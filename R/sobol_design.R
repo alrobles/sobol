@@ -61,47 +61,23 @@
 #' @export
 sobol_design <- function(lower = numeric(0), upper = numeric(0), nseq) {
   # Validate inputs
-  if (length(lower) != length(upper)) {
-    stop("'lower' and 'upper' must have same length")
-  }
-
-  if (length(lower) == 0) {
-    stop("'lower' and 'upper' must not be empty")
-  }
-
-  lnames <- names(lower)
-  if (is.null(lnames)) {
-    stop("'lower' and 'upper' must be named vectors")
-  }
-
-  if (is.null(names(upper))) {
-    stop("'lower' and 'upper' must be named vectors")
-  }
-
-  if (!all(sort(lnames) == sort(names(upper)))) {
-    stop("names of 'lower' and 'upper' must match")
-  }
-
-  if (!is.numeric(nseq) || length(nseq) != 1 || !is.finite(nseq) ||
-        nseq <= 0 || nseq != floor(nseq)) {
-    stop("'nseq' must be a positive integer")
-  }
-
-  if (nseq > 1073741824L) {
-    stop("too many points requested (maximum is 2^30)")
-  }
-
-  if (!all(is.finite(lower)) || !all(is.finite(upper))) {
-    stop("'lower' and 'upper' must contain finite values")
-  }
+  checkmate::assert_numeric(lower, finite = TRUE, any.missing = FALSE,
+                            min.len = 1, names = "named")
+  checkmate::assert_numeric(upper, finite = TRUE, any.missing = FALSE,
+                            min.len = 1, names = "named")
+  checkmate::assert_true(length(lower) == length(upper))
+  checkmate::assert_set_equal(names(lower), names(upper))
+  checkmate::assert_int(nseq, lower = 1, upper = 1073741824L)
 
   # Reorder upper to match lower's names before validation
-  upper <- upper[lnames]
+  upper <- upper[names(lower)]
 
-  if (any(lower >= upper)) {
-    stop("all elements of 'lower' must be less than corresponding elements of
-         'upper'")
-  }
+  # Check that lower < upper for all elements
+  checkmate::assert_true(
+    all(lower < upper),
+    .var.name = "all elements of 'lower' must be less than \
+corresponding elements of 'upper'"
+  )
 
   # Get number of dimensions
   d <- length(lower)

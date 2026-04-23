@@ -24,8 +24,10 @@
 #' which is useful for:
 #' \itemize{
 #'   \item Reproducibility: generating the same subsequence across runs
-#'   \item Parallelization: different workers can generate non-overlapping segments
-#'   \item Continuation: extending a previous sequence without regenerating early points
+#'   \item Parallelization: different workers can generate
+#'     non-overlapping segments
+#'   \item Continuation: extending a previous sequence without
+#'     regenerating early points
 #' }
 #'
 #' @examples
