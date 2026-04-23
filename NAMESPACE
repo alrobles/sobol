@@ -3,6 +3,7 @@
 S3method(print,sobol_generator)
 S3method(print,summary.sobol_generator)
 S3method(summary,sobol_generator)
+export(sobol_design)
 export(sobol_dimensions)
 export(sobol_generator)
 export(sobol_index)
