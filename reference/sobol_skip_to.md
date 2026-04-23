@@ -1,0 +1,42 @@
+# Skip to a Specific Index in a Sobol Generator
+
+Jumps the internal state of the generator to a specific index in the
+Sobol sequence. This allows for reproducible subsequences and parallel
+generation strategies.
+
+## Usage
+
+``` r
+sobol_skip_to(x, index, ...)
+```
+
+## Arguments
+
+- x:
+
+  A sobol_generator object created by
+  [`sobol_generator`](https://alrobles.github.io/sobol/reference/sobol_generator.md)
+
+- index:
+
+  Numeric, the index to skip to. Must be a non-negative integer. The
+  next call to `sobol_next` will return the point at this index.
+
+- ...:
+
+  Additional arguments (currently unused)
+
+## Value
+
+Invisibly returns the sobol_generator object (for chaining). The primary
+purpose is the side effect of updating the internal state.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+gen <- sobol_generator(dimensions = 2)
+sobol_skip_to(gen, 100)
+point <- sobol_next(gen) # This is the 100th point (0-indexed)
+} # }
+```
