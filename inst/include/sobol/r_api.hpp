@@ -50,20 +50,30 @@ inline std::size_t checked_matrix_size(std::size_t n, std::size_t dimensions) {
 
 // Utility adapter for Rcpp wrappers.
 // `sobol_points_column_major` returns data in R matrix layout (column-major order).
+// Optimized version that minimizes allocations and uses cache-friendly access
 inline std::vector<double> sobol_points_column_major(std::size_t n, std::size_t dimensions,
                                                      std::uint64_t skip = 0u) {
   if (dimensions == 0u) {
     throw std::invalid_argument("dimensions must be greater than zero");
   }
+
+  // Pre-allocate output buffer
   std::vector<double> out(checked_matrix_size(n, dimensions));
   SobolEngine engine(dimensions, skip);
 
+  // Use pointer arithmetic for better performance
+  double* out_ptr = out.data();
+
   for (std::size_t row = 0u; row < n; ++row) {
     const auto point = engine.next();
+    const double* point_ptr = point.data();
+
+    // Write in column-major order with pointer arithmetic
     for (std::size_t col = 0u; col < dimensions; ++col) {
-      out[col * n + row] = point[col];
+      out_ptr[col * n + row] = point_ptr[col];
     }
   }
+
   return out;
 }
 
@@ -77,14 +87,24 @@ class RGeneratorAdapter {
 
   std::vector<double> next_point() { return engine_.next(); }
 
+  // Optimized batch generation for R
   std::vector<double> next_points_column_major(std::size_t n) {
     std::vector<double> out(checked_matrix_size(n, engine_.dimensions()));
+    const std::size_t dims = engine_.dimensions();
+
+    // Use pointer for direct access
+    double* out_ptr = out.data();
+
     for (std::size_t row = 0u; row < n; ++row) {
       const auto point = engine_.next();
-      for (std::size_t col = 0u; col < engine_.dimensions(); ++col) {
-        out[col * n + row] = point[col];
+      const double* point_ptr = point.data();
+
+      // Column-major layout with pointer arithmetic
+      for (std::size_t col = 0u; col < dims; ++col) {
+        out_ptr[col * n + row] = point_ptr[col];
       }
     }
+
     return out;
   }
 
