@@ -39,3 +39,9 @@ else()
   target_compile_options(test_sobol_enhanced PRIVATE -UNDEBUG)
 endif()
 add_test(NAME sobol_enhanced_test COMMAND test_sobol_enhanced)
+
+# Optional: Build performance benchmarks if Google Benchmark is available
+option(BUILD_BENCHMARKS "Build performance benchmarks" ON)
+if(BUILD_BENCHMARKS)
+  add_subdirectory(benchmarks)
+endif()
