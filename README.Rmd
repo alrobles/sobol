@@ -317,7 +317,7 @@ system.time(sobol_points(n = 1e6, dimensions = 10))
 
 ## License
 
-MIT License - see LICENSE file for details
+GPL 3 - see LICENSE file for details
 
 ## Contributing
 

@@ -8,3 +8,6 @@ src/*.o
 src/*.so
 .Rproj.user
 old_docs
+/doc/
+/Meta/
+docs

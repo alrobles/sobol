@@ -10,3 +10,9 @@
 ^README\.Rmd$
 ^LICENSE\.md$
 ^benchmarks$
+^doc$
+^Meta$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^CRAN-SUBMISSION$

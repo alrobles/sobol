@@ -84,7 +84,7 @@ sobol_design <- function(lower = numeric(0), upper = numeric(0), nseq) {
 
   # Generate Sobol points in [0, 1]^d
   points <- tryCatch(
-    sobol_points(n = as.integer(nseq), dim = as.integer(d), skip = 0),
+    sobol_points(n = as.integer(nseq), dim = as.integer(d), skip = 1),
     error = function(e) {
       stop("Failed to generate Sobol sequence: ", e$message)
     }
