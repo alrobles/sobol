@@ -95,12 +95,12 @@ sobol_design <- function(lower = numeric(0), upper = numeric(0), nseq) {
     stop("'lower' and 'upper' must contain finite values")
   }
 
+  # Reorder upper to match lower's names before validation
+  upper <- upper[lnames]
+
   if (any(lower >= upper)) {
     stop("all elements of 'lower' must be less than corresponding elements of 'upper'")
   }
-
-  # Reorder upper to match lower's names
-  upper <- upper[lnames]
 
   # Get number of dimensions
   d <- length(lower)
