@@ -69,7 +69,7 @@ auto batch = sobol::sobol_points(/*n=*/1024, /*dimensions=*/3, /*skip=*/128);
 
 ## R integration API surface
 
-`include/sobol/r_api.hpp` provides `sobol::sobol_points_column_major(n, dimensions, skip)`
+`inst/include/sobol/r_api.hpp` provides `sobol::sobol_points_column_major(n, dimensions, skip)`
 which returns flattened column-major doubles ready for an `Rcpp::NumericMatrix` bridge.
 It also exposes `sobol::RGeneratorAdapter` for incremental generation (`next_point`,
 `next_points_column_major`, `skip_to`).

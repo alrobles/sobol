@@ -17,7 +17,7 @@ This document describes the compile-time table generation system for Sobol seque
   2. Testing primitivity (generator of the multiplicative group)
   3. Selecting the first valid polynomial found
 
-**Implementation**: `sobol::detail::generate_primitive_polynomials()` in `include/sobol/primitive_polynomial.hpp`
+**Implementation**: `sobol::detail::generate_primitive_polynomials()` in `inst/include/sobol/primitive_polynomial.hpp`
 
 **Storage Format**:
 - Array of `std::uint32_t` values
@@ -58,7 +58,7 @@ where:
 - a[k] are the polynomial coefficients
 - ⊕ is XOR operation
 
-**Implementation**: `direction_numbers_for_dimension()` in `include/sobol/direction_numbers.hpp`
+**Implementation**: `direction_numbers_for_dimension()` in `inst/include/sobol/direction_numbers.hpp`
 
 ### 4. Table Storage
 
@@ -66,7 +66,7 @@ where:
 - **Primitive Polynomials**: `std::array<std::uint32_t, 1000>`
 - **Direction Numbers**: `std::array<std::array<std::uint32_t, 32>, 1000>`
 
-**Location**: `include/sobol/precomputed_tables.hpp` (generated file)
+**Location**: `inst/include/sobol/precomputed_tables.hpp` (generated file)
 
 **Size**: ~477 KB for 1000 dimensions
 
@@ -126,7 +126,7 @@ cmake --build build --target generate_sobol_tables
 ```
 
 ### Output
-- File: `include/sobol/precomputed_tables.hpp`
+- File: `inst/include/sobol/precomputed_tables.hpp`
 - Contains: 1000 dimensions of precomputed data
 - Includes: Documentation in embedded comments
 
@@ -168,7 +168,7 @@ target_link_libraries(generate_tables PRIVATE sobol)
 
 # Custom target for regeneration
 add_custom_target(generate_sobol_tables
-  COMMAND generate_tables ${CMAKE_CURRENT_SOURCE_DIR}/include/sobol/precomputed_tables.hpp
+  COMMAND generate_tables ${CMAKE_CURRENT_SOURCE_DIR}/inst/include/sobol/precomputed_tables.hpp
   DEPENDS generate_tables
   COMMENT "Generating precomputed Sobol tables"
 )
