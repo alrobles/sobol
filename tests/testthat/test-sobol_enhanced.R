@@ -21,16 +21,16 @@ test_that("sobol_generator accepts skip parameter", {
 })
 
 test_that("sobol_generator validates dimensions", {
-  expect_error(sobol_generator(dimensions = 0), "'dimensions' must be a positive integer")
-  expect_error(sobol_generator(dimensions = -1), "'dimensions' must be a positive integer")
-  expect_error(sobol_generator(dimensions = 1.5), "'dimensions' must be a positive integer")
-  expect_error(sobol_generator(dimensions = "3"), "'dimensions' must be a positive integer")
+  expect_error(sobol_generator(dimensions = 0), "Assertion on 'dimensions'")
+  expect_error(sobol_generator(dimensions = -1), "Assertion on 'dimensions'")
+  expect_error(sobol_generator(dimensions = 1.5), "Assertion on 'dimensions'")
+  expect_error(sobol_generator(dimensions = "3"), "Assertion on 'dimensions'")
 })
 
 test_that("sobol_generator validates skip", {
-  expect_error(sobol_generator(dimensions = 2, skip = -1), "'skip' must be a non-negative integer")
-  expect_error(sobol_generator(dimensions = 2, skip = 1.5), "'skip' must be a non-negative integer")
-  expect_error(sobol_generator(dimensions = 2, skip = "10"), "'skip' must be a non-negative integer")
+  expect_error(sobol_generator(dimensions = 2, skip = -1), "Assertion on 'skip' failed")
+  expect_error(sobol_generator(dimensions = 2, skip = 1.5), "Assertion on 'skip' failed")
+  expect_error(sobol_generator(dimensions = 2, skip = "10"), "Assertion on 'skip' failed")
 })
 
 # Test Point Generation
@@ -55,8 +55,8 @@ test_that("sobol_next advances state", {
 
 test_that("sobol_next validates input", {
   gen <- sobol_generator(dimensions = 2)
-  expect_error(sobol_next("not a generator"), "'x' must be a sobol_generator object")
-  expect_error(sobol_next(list(a = 1)), "'x' must be a sobol_generator object")
+  expect_error(sobol_next("not a generator"), "Assertion on 'x'")
+  expect_error(sobol_next(list(a = 1)), "Assertion on 'x' failed: Must inherit from class 'sobol_generator',")
 })
 
 test_that("sobol_next_n generates multiple points", {
@@ -90,10 +90,10 @@ test_that("sobol_next_n advances state correctly", {
 test_that("sobol_next_n validates inputs", {
   gen <- sobol_generator(dimensions = 2)
 
-  expect_error(sobol_next_n("not a generator", 5), "'x' must be a sobol_generator object")
-  expect_error(sobol_next_n(gen, n = -1), "'n' must be a non-negative integer")
-  expect_error(sobol_next_n(gen, n = 1.5), "'n' must be a non-negative integer")
-  expect_error(sobol_next_n(gen, n = "5"), "'n' must be a non-negative integer")
+  expect_error(sobol_next_n("not a generator", 5), "Assertion on 'x' failed: Must inherit from class 'sobol_generator',")
+  expect_error(sobol_next_n(gen, n = -1), "Assertion on 'n' failed: Element 1 is not >= 0.")
+  expect_error(sobol_next_n(gen, n = 1.5), "Assertion on 'n' failed: Must be of type 'single integerish value', not 'double'.")
+  expect_error(sobol_next_n(gen, n = "5"), "Assertion on 'n' failed: Must be of type 'single integerish value', not 'character'.")
 })
 
 # Test Skip Functionality
@@ -118,10 +118,10 @@ test_that("sobol_skip_to returns object invisibly", {
 test_that("sobol_skip_to validates inputs", {
   gen <- sobol_generator(dimensions = 2)
 
-  expect_error(sobol_skip_to("not a generator", 10), "'x' must be a sobol_generator object")
-  expect_error(sobol_skip_to(gen, -1), "'index' must be a non-negative integer")
-  expect_error(sobol_skip_to(gen, 1.5), "'index' must be a non-negative integer")
-  expect_error(sobol_skip_to(gen, "10"), "'index' must be a non-negative integer")
+  expect_error(sobol_skip_to("not a generator", 10), "Assertion on 'x' failed: Must inherit from class 'sobol_generator', but has class 'character'.")
+  expect_error(sobol_skip_to(gen, -1), "Assertion on 'index' failed: Element 1 is not >= 0.")
+  expect_error(sobol_skip_to(gen, 1.5), "Failed to skip to index: SobolGenerator::skip_to failed: point_index must be an integer value")
+  expect_error(sobol_skip_to(gen, "10"), "Assertion on 'index' failed: Must be of type 'number', not 'character'.")
 })
 
 # Test Query Functions
@@ -142,8 +142,8 @@ test_that("sobol_dimensions returns dimensions", {
 })
 
 test_that("query functions validate input", {
-  expect_error(sobol_index("not a generator"), "'x' must be a sobol_generator object")
-  expect_error(sobol_dimensions("not a generator"), "'x' must be a sobol_generator object")
+  expect_error(sobol_index("not a generator"), "Assertion on 'x' failed: Must inherit from class 'sobol_generator', but has class 'character'.")
+  expect_error(sobol_dimensions("not a generator"), "Assertion on 'x' failed: Must inherit from class 'sobol_generator', but has class 'character'.")
 })
 
 # Test Batch Function
@@ -314,7 +314,7 @@ test_that("2D sequence matches reference values", {
     0.25, 0.75
   ), ncol = 2, byrow = TRUE)
 
-  for (i in 1:nrow(expected)) {
+  for (i in seq_len(nrow(expected))) {
     point <- sobol_next(gen)
     expect_equal(point, expected[i, ], tolerance = 1e-10)
   }

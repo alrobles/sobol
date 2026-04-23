@@ -1,3 +1,4 @@
+library(testthat)
 test_that("sobol_design basic functionality works", {
   # Basic 2D design
   design <- sobol_design(
@@ -48,7 +49,7 @@ test_that("sobol_design validates inputs", {
   # Missing names
   expect_error(
     sobol_design(lower = c(0, 1), upper = c(1, 2), nseq = 10),
-    "named"
+    "Assertion on 'lower' failed: Must have names."
   )
 
   # Name mismatch
@@ -71,13 +72,13 @@ test_that("sobol_design validates inputs", {
   # Too many points
   expect_error(
     sobol_design(lower = c(a = 0), upper = c(a = 1), nseq = 2^30 + 1),
-    "nseq"
+    "Assertion on 'nseq' failed"
   )
 
   # Empty vectors
   expect_error(
     sobol_design(lower = numeric(0), upper = numeric(0), nseq = 10),
-    "min.len"
+    "Must have length >= 1, "
   )
 
   # Lower >= upper
@@ -175,3 +176,4 @@ test_that("sobol_design API matches pomp-explore expectations", {
   expect_true(all(design$a >= 0 & design$a <= 1))
   expect_true(all(design$b >= 100 & design$b <= 200))
 })
+
