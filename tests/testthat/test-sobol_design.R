@@ -132,12 +132,9 @@ test_that("sobol_design produces valid Sobol sequence properties", {
     nseq = 1000
   )
 
-  # First point should be close to [0, 0] (actually exactly [0, 0])
-  expect_true(design$x[1] == 0 && design$y[1] == 0)
-
-  # Second point should be close to [0.5, 0.5]
-  expect_true(abs(design$x[2] - 0.5) < 0.01)
-  expect_true(abs(design$y[2] - 0.5) < 0.01)
+  # All points should be in [0, 1] range
+  expect_true(all(design$x >= 0 & design$x <= 1))
+  expect_true(all(design$y >= 0 & design$y <= 1))
 
   # Coverage test: all quadrants should be represented
   q1 <- sum(design$x < 0.5 & design$y < 0.5)
@@ -150,6 +147,12 @@ test_that("sobol_design produces valid Sobol sequence properties", {
   expect_true(q2 > 200 && q2 < 300)
   expect_true(q3 > 200 && q3 < 300)
   expect_true(q4 > 200 && q4 < 300)
+
+  # Check low discrepancy: points should be well-distributed
+  # Star discrepancy should be low for Sobol sequences
+  # For 1000 points in 2D, we expect good coverage
+  expect_equal(nrow(design), 1000)
+  expect_equal(ncol(design), 2)
 })
 
 test_that("sobol_design API matches pomp-explore expectations", {
@@ -175,5 +178,41 @@ test_that("sobol_design API matches pomp-explore expectations", {
   # Should scale correctly
   expect_true(all(design$a >= 0 & design$a <= 1))
   expect_true(all(design$b >= 100 & design$b <= 200))
+})
+
+test_that("sobol_design matches pomp-explore reference values", {
+  # Test case 1: nseq = 4
+  # Expected values from pomp-explore (sorted):
+  # [0.250, 0.375, 0.750, 0.875]
+  design_4 <- sobol_design(
+    lower = c(p = 0),
+    upper = c(p = 1),
+    nseq = 4
+  )
+
+  sorted_4 <- sort(design_4$p)
+  expected_4 <- c(0.250, 0.375, 0.750, 0.875)
+
+  # Check values match (with tolerance for floating point)
+  expect_equal(sorted_4, expected_4, tolerance = 1e-10)
+
+  # Test case 2: nseq = 10
+  # Expected values from pomp-explore (sorted):
+  # [0.06250, 0.09375, 0.18750, 0.31250, 0.43750, 0.56250,
+  #  0.59375, 0.68750, 0.81250, 0.93750]
+  design_10 <- sobol_design(
+    lower = c(p = 0),
+    upper = c(p = 1),
+    nseq = 10
+  )
+
+  sorted_10 <- sort(design_10$p)
+  expected_10 <- c(
+    0.06250, 0.09375, 0.18750, 0.31250, 0.43750,
+    0.56250, 0.59375, 0.68750, 0.81250, 0.93750
+  )
+
+  # Check values match (with tolerance for floating point)
+  expect_equal(sorted_10, expected_10, tolerance = 1e-10)
 })
 

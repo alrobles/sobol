@@ -20,6 +20,11 @@
 #' sequence is generated using the Joe-Kuo direction numbers with Property A
 #' enforcement, providing excellent low-discrepancy properties.
 #'
+#' Following the recommendation of Joe & Kuo (2003) and the implementation
+#' in pomp-explore, this function skips the first k points of the Sobol
+#' sequence, where k is the largest power of 2 smaller than nseq. This
+#' improves the uniformity properties of the generated design.
+#'
 #' The function is designed to be API-compatible with the \code{sobol_design}
 #' function from the pomp-explore package, allowing for easy comparison and
 #' drop-in replacement.
@@ -82,9 +87,20 @@ sobol_design <- function(lower = numeric(0), upper = numeric(0), nseq) {
   # Get number of dimensions
   d <- length(lower)
 
+  # Calculate skip count following Joe & Kuo (2003) recommendation:
+  # Skip the largest power of 2 smaller than nseq for better uniformity
+  skip_count <- 1L
+  while (skip_count * 2L < nseq) {
+    skip_count <- skip_count * 2L
+  }
+
   # Generate Sobol points in [0, 1]^d
   points <- tryCatch(
-    sobol_points(n = as.integer(nseq), dim = as.integer(d), skip = 1),
+    sobol_points(
+      n = as.integer(nseq),
+      dim = as.integer(d),
+      skip = as.numeric(skip_count)
+    ),
     error = function(e) {
       stop("Failed to generate Sobol sequence: ", e$message)
     }
