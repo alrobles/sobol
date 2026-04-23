@@ -37,13 +37,13 @@
 sobol_generator <- function(dimensions, skip = 0) {
   # Validate inputs
   if (!is.numeric(dimensions) || length(dimensions) != 1 ||
-    !is.finite(dimensions) || dimensions <= 0 ||
-    dimensions != floor(dimensions)) {
+        !is.finite(dimensions) || dimensions <= 0 ||
+        dimensions != floor(dimensions)) {
     stop("'dimensions' must be a positive integer")
   }
 
   if (!is.numeric(skip) || length(skip) != 1 ||
-    !is.finite(skip) || skip < 0 || skip != floor(skip)) {
+        !is.finite(skip) || skip < 0 || skip != floor(skip)) {
     stop("'skip' must be a non-negative integer")
   }
 
@@ -72,7 +72,7 @@ sobol_generator <- function(dimensions, skip = 0) {
     class = "sobol_generator"
   )
 
-  return(obj)
+  obj
 }
 
 #' Generate the Next Point from a Sobol Generator
@@ -133,7 +133,8 @@ sobol_next_n <- function(x, n, ...) {
     stop("'x' must be a sobol_generator object")
   }
 
-  if (!is.numeric(n) || length(n) != 1 || !is.finite(n) || n < 0 || n != floor(n)) {
+  if (!is.numeric(n) || length(n) != 1 || !is.finite(n) || n < 0 ||
+        n != floor(n)) {
     stop("'n' must be a non-negative integer")
   }
 
@@ -174,7 +175,8 @@ sobol_skip_to <- function(x, index, ...) {
     stop("'x' must be a sobol_generator object")
   }
 
-  if (!is.numeric(index) || length(index) != 1 || !is.finite(index) || index < 0 || index != floor(index)) {
+  if (!is.numeric(index) || length(index) != 1 || !is.finite(index) || index < 0
+      || index != floor(index)) {
     stop("'index' must be a non-negative integer")
   }
 
@@ -286,7 +288,8 @@ print.sobol_generator <- function(x, ...) {
 #' @param object A sobol_generator object
 #' @param ... Additional arguments passed to summary
 #'
-#' @return A list with class "summary.sobol_generator" containing summary information
+#' @return A list with class "summary.sobol_generator" containing summary
+#' information
 #'
 #' @export
 summary.sobol_generator <- function(object, ...) {
@@ -299,7 +302,8 @@ summary.sobol_generator <- function(object, ...) {
     dimensions = object$dimensions,
     initial_skip = object$initial_skip,
     current_index = current_idx,
-    points_generated = if (!is.na(current_idx)) current_idx - object$initial_skip else NA
+    points_generated = if (!is.na(current_idx))
+      current_idx - object$initial_skip else NA
   )
 
   class(info) <- "summary.sobol_generator"

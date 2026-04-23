@@ -39,14 +39,14 @@ which is useful for:
 \dontrun{
 # Generate 1000 points in 5 dimensions
 points <- sobol_points(n = 1000, dim = 5)
-dim(points)  # [1] 1000    5
+dim(points) # [1] 1000    5
 
 # Skip the first 100 points
 points_skipped <- sobol_points(n = 100, dim = 2, skip = 100)
 
 # Empty result
 empty <- sobol_points(n = 0, dim = 3)
-dim(empty)  # [1] 0 3
+dim(empty) # [1] 0 3
 }
 
 }

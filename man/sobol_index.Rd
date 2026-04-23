@@ -24,7 +24,7 @@ gen <- sobol_generator(dimensions = 2)
 sobol_next(gen)
 sobol_next(gen)
 idx <- sobol_index(gen)
-print(idx)  # 2
+print(idx) # 2
 }
 
 }

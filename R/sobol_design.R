@@ -4,10 +4,10 @@
 #' This function provides an API-compatible alternative to the sobol_design
 #' function in the pomp-explore package for generating parameter designs.
 #'
-#' @param lower Named numeric vector giving the lower bounds of the parameter ranges.
-#'   Must have the same names as \code{upper}.
-#' @param upper Named numeric vector giving the upper bounds of the parameter ranges.
-#'   Must have the same names as \code{lower}.
+#' @param lower Named numeric vector giving the lower bounds of the parameter
+#' ranges. Must have the same names as \code{upper}.
+#' @param upper Named numeric vector giving the upper bounds of the parameter
+#' ranges. Must have the same names as \code{lower}.
 #' @param nseq Integer, the total number of parameter sets (points) to generate.
 #'
 #' @return A data frame with \code{nseq} rows and one column for each parameter
@@ -83,7 +83,7 @@ sobol_design <- function(lower = numeric(0), upper = numeric(0), nseq) {
   }
 
   if (!is.numeric(nseq) || length(nseq) != 1 || !is.finite(nseq) ||
-    nseq <= 0 || nseq != floor(nseq)) {
+        nseq <= 0 || nseq != floor(nseq)) {
     stop("'nseq' must be a positive integer")
   }
 
@@ -99,7 +99,8 @@ sobol_design <- function(lower = numeric(0), upper = numeric(0), nseq) {
   upper <- upper[lnames]
 
   if (any(lower >= upper)) {
-    stop("all elements of 'lower' must be less than corresponding elements of 'upper'")
+    stop("all elements of 'lower' must be less than corresponding elements of
+         'upper'")
   }
 
   # Get number of dimensions

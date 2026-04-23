@@ -23,7 +23,7 @@ internal state of the generator.
 \dontrun{
 gen <- sobol_generator(dimensions = 3)
 point <- sobol_next(gen)
-print(point)  # e.g., [0.5, 0.5, 0.5]
+print(point) # e.g., [0.5, 0.5, 0.5]
 }
 
 }

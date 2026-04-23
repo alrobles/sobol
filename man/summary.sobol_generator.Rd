@@ -12,7 +12,8 @@
 \item{...}{Additional arguments passed to summary}
 }
 \value{
-A list with class "summary.sobol_generator" containing summary information
+A list with class "summary.sobol_generator" containing summary
+information
 }
 \description{
 Summary Method for Sobol Generator

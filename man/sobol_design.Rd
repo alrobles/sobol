@@ -7,11 +7,11 @@
 sobol_design(lower = numeric(0), upper = numeric(0), nseq)
 }
 \arguments{
-\item{lower}{Named numeric vector giving the lower bounds of the parameter ranges.
-Must have the same names as \code{upper}.}
+\item{lower}{Named numeric vector giving the lower bounds of the parameter
+ranges. Must have the same names as \code{upper}.}
 
-\item{upper}{Named numeric vector giving the upper bounds of the parameter ranges.
-Must have the same names as \code{lower}.}
+\item{upper}{Named numeric vector giving the upper bounds of the parameter
+ranges. Must have the same names as \code{lower}.}
 
 \item{nseq}{Integer, the total number of parameter sets (points) to generate.}
 }
