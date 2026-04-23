@@ -4,14 +4,14 @@
 
 The implementation is a modular header-only C++17 library:
 
-- `include/sobol/primitive_polynomial.hpp`
+- `inst/include/sobol/primitive_polynomial.hpp`
   - Primitive polynomial discovery over GF(2) for requested dimensions.
-- `include/sobol/direction_numbers.hpp`
+- `inst/include/sobol/direction_numbers.hpp`
   - Direction number table construction.
   - Joe-Kuo-style initialization with per-dimension full-rank checks for initial direction values.
-- `include/sobol/sobol.hpp`
+- `inst/include/sobol/sobol.hpp`
   - Gray-code incremental point generation (`next`) and direct `skip_to` logic.
-- `include/sobol/r_api.hpp`
+- `inst/include/sobol/r_api.hpp`
   - R-facing column-major adapter and incremental adapter for Rcpp wrappers.
 
 ## Algorithm notes
