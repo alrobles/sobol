@@ -1,1 +1,3 @@
 PKG_CPPFLAGS = -I../inst/include
+# Optimization flags for Windows builds
+PKG_CXXFLAGS = $(SHLIB_OPENMP_CXXFLAGS) -O3

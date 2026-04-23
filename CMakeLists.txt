@@ -1,9 +1,34 @@
 cmake_minimum_required(VERSION 3.16)
 project(sobol LANGUAGES CXX)
 
+# Optimization flags
+option(ENABLE_OPTIMIZATIONS "Enable aggressive compiler optimizations" ON)
+
 add_library(sobol INTERFACE)
 target_include_directories(sobol INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/inst/include)
 target_compile_features(sobol INTERFACE cxx_std_17)
+
+# Apply compiler-specific optimizations
+if(ENABLE_OPTIMIZATIONS)
+  if(MSVC)
+    # MSVC optimizations
+    target_compile_options(sobol INTERFACE
+      /O2           # Optimize for speed
+      /GL           # Whole program optimization
+      /arch:AVX2    # Enable AVX2 instructions (if available)
+    )
+  else()
+    # GCC/Clang optimizations
+    target_compile_options(sobol INTERFACE
+      -O3                    # Aggressive optimization
+      -march=native          # Optimize for current CPU architecture
+      -mtune=native          # Fine-tune for current CPU
+      -ffast-math            # Fast floating-point math (safe for Sobol sequences)
+      -funroll-loops         # Unroll loops for better performance
+      -fomit-frame-pointer   # Omit frame pointer for smaller/faster code
+    )
+  endif()
+endif()
 
 # Code generator for precomputed tables
 add_executable(generate_tables tools/generate_tables.cpp)
@@ -39,3 +64,9 @@ else()
   target_compile_options(test_sobol_enhanced PRIVATE -UNDEBUG)
 endif()
 add_test(NAME sobol_enhanced_test COMMAND test_sobol_enhanced)
+
+# Optional: Build performance benchmarks if Google Benchmark is available
+option(BUILD_BENCHMARKS "Build performance benchmarks" ON)
+if(BUILD_BENCHMARKS)
+  add_subdirectory(benchmarks)
+endif()
