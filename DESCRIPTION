@@ -3,20 +3,13 @@ Type: Package
 Title: Quasi-Monte Carlo Sobol Sequence Generator
 Version: 0.1.0
 Authors@R: c(
-    person("Angel", "Robles", email = "alrobles@example.com", role = c("aut", "cre")),
+    person("Angel", "Robles", email = "a.l.robles.fernandez@gmail.com", role = c("aut", "cre")),
     person("Ilya M.", "Sobol", role = "ctb", comment = "Original Sobol sequence algorithm"),
     person("Paul", "Bratley", role = "ctb", comment = "Algorithm implementation reference"),
     person("Bennett L.", "Fox", role = "ctb", comment = "Algorithm implementation reference"),
     person("Stephen", "Joe", role = "ctb", comment = "Direction numbers and primitive polynomials"),
     person("Frances Y.", "Kuo", role = "ctb", comment = "Direction numbers and primitive polynomials")
     )
-Author: Angel Robles [aut, cre],
-  Ilya M. Sobol [ctb] (Original Sobol sequence algorithm),
-  Paul Bratley [ctb] (Algorithm implementation reference),
-  Bennett L. Fox [ctb] (Algorithm implementation reference),
-  Stephen Joe [ctb] (Direction numbers and primitive polynomials),
-  Frances Y. Kuo [ctb] (Direction numbers and primitive polynomials)
-Maintainer: Angel Robles <alrobles@example.com>
 Description: Provides a fast and efficient implementation of Sobol sequences
     for quasi-Monte Carlo methods. The Sobol sequence is a low-discrepancy
     sequence with the property that for all values of N, its subsequence
@@ -28,7 +21,6 @@ Description: Provides a fast and efficient implementation of Sobol sequences
     The package includes both batch and incremental interfaces with support
     for arbitrary starting indices and reproducible sequences. It uses 'Rcpp'
     for efficient C++ integration.
-License: BSD_3_clause + file LICENSE
 URL: https://github.com/alrobles/sobol
 BugReports: https://github.com/alrobles/sobol/issues
 Encoding: UTF-8
@@ -48,3 +40,4 @@ Suggests:
     microbenchmark
 VignetteBuilder: knitr
 RoxygenNote: 7.3.3
+License: GPL (>= 3)

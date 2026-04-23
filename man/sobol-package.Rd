@@ -17,7 +17,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Angel Robles \email{alrobles@example.com}
+\strong{Maintainer}: Angel Robles \email{a.l.robles.fernandez@gmail.com}
 
 Other contributors:
 \itemize{

@@ -8,3 +8,5 @@
 ^scripts$
 ^.*\.md$
 ^README\.Rmd$
+^LICENSE\.md$
+^benchmarks$
