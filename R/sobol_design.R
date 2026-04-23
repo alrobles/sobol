@@ -76,7 +76,7 @@ sobol_design <- function(lower = numeric(0), upper = numeric(0), nseq) {
   checkmate::assert_true(
     all(lower < upper),
     .var.name = "all elements of 'lower' must be less than \
-corresponding elements of 'upper'"
+    corresponding elements of 'upper'"
   )
 
   # Get number of dimensions
@@ -100,6 +100,7 @@ corresponding elements of 'upper'"
   )
 
   # Convert to data frame with proper column names
+  lnames <- names(lower)
   colnames(scaled) <- lnames
   as.data.frame(scaled)
 }
