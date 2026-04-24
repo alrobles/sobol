@@ -51,7 +51,8 @@ jobs:
 
     - name: Run R tests
       run: |
-        Rscript -e 'testthat::test_dir("tests/testthat")'
+        R CMD INSTALL .
+        Rscript -e 'library(sobol); testthat::test_dir("tests/testthat")'
       continue-on-error: false
 
     - name: Test coverage
@@ -108,7 +109,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        install.packages(c("Rcpp", "testthat"))
+        install.packages(c("Rcpp", "checkmate", "testthat"))
       shell: Rscript {0}
 
     - name: Install package

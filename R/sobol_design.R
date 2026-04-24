@@ -115,6 +115,11 @@ sobol_design <- function(lower = numeric(0), upper = numeric(0), nseq) {
     numeric(nseq)
   )
 
+  # Ensure result is always a matrix (vapply returns a vector when nseq == 1)
+  if (!is.matrix(scaled)) {
+    scaled <- matrix(scaled, nrow = nseq, ncol = d)
+  }
+
   # Convert to data frame with proper column names
   lnames <- names(lower)
   colnames(scaled) <- lnames
