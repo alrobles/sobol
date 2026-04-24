@@ -1,6 +1,17 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://alrobles.github.io/sobol/404.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/ENHANCEMENT_OVERVIEW.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/ENHANCEMENT_PLAN.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/ENHANCEMENT_README.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/IMPLEMENTATION_SUMMARY.html</loc></url>
 <url><loc>https://alrobles.github.io/sobol/LICENSE.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/RELEASE_CHECKLIST.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/SUBISSUE_1_CORE_CODE.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/SUBISSUE_2_DOCUMENTATION.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/SUBISSUE_3_TESTS.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/SUBISSUE_4_METADATA.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/SUBISSUE_5_VIGNETTES.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/SUBISSUE_6_BENCHMARKS.html</loc></url>
 <url><loc>https://alrobles.github.io/sobol/articles/index.html</loc></url>
 <url><loc>https://alrobles.github.io/sobol/articles/sobol-sequences.html</loc></url>
 <url><loc>https://alrobles.github.io/sobol/articles/sobol.html</loc></url>
