@@ -18,7 +18,7 @@ for arbitrary starting indices and reproducible sequences. It uses
 
 Useful links:
 
-- [\<https://alrobles.github.io/sobol\>](NA)
+- <https://alrobles.github.io/sobol/>
 
 - Report bugs at <https://github.com/alrobles/sobol/issues>
 
