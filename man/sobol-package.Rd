@@ -11,7 +11,7 @@ Provides a fast and efficient implementation of Sobol sequences for quasi-Monte 
 \seealso{
 Useful links:
 \itemize{
-  \item \url{<https://alrobles.github.io/sobol>}
+  \item \url{https://alrobles.github.io/sobol}
   \item Report bugs at \url{https://github.com/alrobles/sobol/issues}
 }
 
