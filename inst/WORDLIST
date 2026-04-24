@@ -11,14 +11,18 @@ GitHub
 grey
 Href
 hpp
+hypercube
 inline
+Ilya
 Kuo
 lifecycle
 MERCHANTABILITY
+pomp
 Precomputed
 precomputed
 QMC
 quasi
+quasirandom
 Rcpp
 Runtime
 sobol
@@ -26,7 +30,4 @@ Sobol
 subsequence
 subsequences
 VignetteBuilder
-Bratley
-Kuo
-Sobol
 xN
