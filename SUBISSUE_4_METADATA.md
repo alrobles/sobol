@@ -184,6 +184,7 @@ Ready for CRAN submission
 ## Tools
 
 ``` r
+
 # Local checks
 devtools::check(cran = TRUE)
 

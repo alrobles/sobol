@@ -8,11 +8,13 @@ reproducibility and parallel workflows.
 ## Installation
 
 ``` r
+
 # From GitHub
 devtools::install_github("alrobles/sobol")
 ```
 
 ``` r
+
 library(sobol)
 ```
 
@@ -30,6 +32,7 @@ You want to explore the space with 200 well‑spread points.
 returns a **data frame** ready to be fed into your objective function.
 
 ``` r
+
 design <- sobol_design(
   lower = c(learning_rate = 0.0001, momentum = 0.00, dropout = 0.0),
   upper = c(learning_rate = 0.1000, momentum = 0.99, dropout = 0.5),
@@ -49,6 +52,7 @@ head(design)
 Points are in the exact ranges you specified:
 
 ``` r
+
 summary(design)
 #>  learning_rate          momentum           dropout         
 #>  Min.   :0.0004902   Min.   :0.003867   Min.   :0.0009766  
@@ -63,6 +67,7 @@ The design is **deterministic** and **space‑filling** – already a big
 improvement over simple random or grid search.
 
 ``` r
+
 # Use the design directly inside your optimisation loop
 results <- purrr::pmap_dbl(design, ~ my_model(lr = ..1, mom = ..2, drop = ..3))
 ```
@@ -83,6 +88,7 @@ column to your bounds.
 Try it against a random Latin hypercube:
 
 ``` r
+
 # Not run, but you can compare visual uniformity
 plot(design$learning_rate, design$momentum, col = "steelblue",
      main = "Sobol design (200 points)")
@@ -96,6 +102,7 @@ points, use
 directly.
 
 ``` r
+
 raw <- sobol_points(n = 512, dim = 4)
 dim(raw)           # 512 rows, 4 columns
 #> [1] 512   4
@@ -114,6 +121,7 @@ you want to **evaluate a few, check convergence, then generate more**.
 That’s where the stateful generator shines.
 
 ``` r
+
 gen <- sobol_generator(dim = 3)
 
 # Generate one point
@@ -133,6 +141,7 @@ sobol_index(gen)
 You can also **jump** to any position:
 
 ``` r
+
 sobol_skip_to(gen, 1000)
 sobol_index(gen)
 #> [1] 1000
@@ -146,6 +155,7 @@ All sequences are deterministic. So two calls with the same parameters
 will always match:
 
 ``` r
+
 a <- sobol_design(lower = c(p = 0), upper = c(p = 1), nseq = 32)
 b <- sobol_design(lower = c(p = 0), upper = c(p = 1), nseq = 32)
 identical(a, b)   # TRUE
@@ -160,6 +170,7 @@ To distribute work across multiple cores or machines, assign each a
 - Worker 3: points `2000 – 2999`
 
 ``` r
+
 # Worker 1
 w1 <- sobol_design(lower = c(lr = 0.0001, mom = 0, drop = 0),
                    upper = c(lr = 0.1,    mom = 0.99, drop = 0.5),
@@ -180,6 +191,7 @@ one‑liners.)*
 A generator can be “rewound” at any time to re‑evaluate a segment:
 
 ``` r
+
 gen <- sobol_generator(dim = 2)
 first_10 <- sobol_next_n(gen, n = 10)
 
@@ -212,6 +224,7 @@ Precomputed tables cover the first 1000 dimensions instantly.
   file
 
 ``` r
+
 # Clean up
 rm(design, raw, gen, a, b, first_10, replicated)
 ```

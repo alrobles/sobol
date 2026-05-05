@@ -155,6 +155,7 @@ feedback incorporation
 ### Quality Assurance
 
 ``` r
+
 devtools::check(cran = TRUE)
 rhub::check_for_cran()
 goodpractice::gp()
@@ -167,6 +168,7 @@ covr::package_coverage()
 ### Pre-Submission Checks
 
 ``` r
+
 devtools::check_win_devel()
 devtools::check_win_release()
 devtools::check_win_oldrelease()

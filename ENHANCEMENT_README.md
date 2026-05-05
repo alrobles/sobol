@@ -117,6 +117,7 @@ context
 ### Quick Checks
 
 ``` r
+
 # CRAN check
 devtools::check(cran = TRUE)
 
@@ -133,6 +134,7 @@ covr::package_coverage()
 ### Pre-Submission
 
 ``` r
+
 # Remote CRAN checks
 rhub::check_for_cran()
 devtools::check_win_devel()

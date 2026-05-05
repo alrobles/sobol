@@ -206,6 +206,7 @@ Demonstrate ≥10x speedup vs. baseline (if achievable)
 ## Tools
 
 ``` r
+
 # Benchmarking
 library(microbenchmark)
 library(bench)
@@ -225,6 +226,7 @@ benchmarkme::get_ram()
 ## Benchmark Template
 
 ``` r
+
 # System information
 cat("System:", Sys.info()["sysname"], "\n")
 cat("R version:", R.version.string, "\n")
@@ -244,6 +246,7 @@ saveRDS(results, "results/benchmark_YYYYMMDD.rds")
 ## Analysis Template
 
 ``` r
+
 # Load results
 results <- readRDS("results/benchmark_YYYYMMDD.rds")
 

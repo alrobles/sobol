@@ -224,6 +224,7 @@ Code follows best practices
 ## Tools
 
 ``` r
+
 # Build vignettes
 devtools::build_vignettes()
 

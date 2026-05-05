@@ -23,6 +23,7 @@ management.
 ## Installation
 
 ``` r
+
 # Install from source
 devtools::install_github("alrobles/sobol")
 ```
@@ -34,6 +35,7 @@ before running an optimiser. sobol_design() returns a data frame of
 scaled points that you can feed directly to your objective function.
 
 ``` r
+
 library(sobol)
 
 # Define ranges for three fake hyperparameters
@@ -58,12 +60,14 @@ or incremental control.
 ### Raw point matrices with sobol_points()
 
 ``` r
+
 mat <- sobol_points(n = 512, dim = 4)   # 512×4 matrix in [0,1)
 ```
 
 ### Stateful generator with sobol_generator()
 
 ``` r
+
 gen <- sobol_generator(dim = 2, skip = 1000)
 pt  <- sobol_next(gen)                  # vector of length 2
 batch <- sobol_next_n(gen, n = 100)     # 100×2 matrix
@@ -86,6 +90,7 @@ For parallel optimisation or multi‑node sampling, use skipping to
 partition the sequence:
 
 ``` r
+
 # Worker 1 handles points 0–999
 w1 <- sobol_points(n = 1000, dim = 3, skip = 0)
 
@@ -107,18 +112,19 @@ The library is heavily optimised:
 
 ### Reference at a glance
 
-| Function                           | Purpose                                           | Output               |
-|------------------------------------|---------------------------------------------------|----------------------|
-| `sobol_design(lower, upper, nseq)` | Scaled parameter design (recommended entry point) | data frame           |
-| `sobol_points(n, dim, skip = 0)`   | Raw Sobol matrix in \[0,1)                        | numeric matrix       |
-| `sobol_generator(dim, skip = 0)`   | Stateful generator object                         | S3 `sobol_generator` |
-| `sobol_next(x)`                    | Next single point                                 | numeric vector       |
-| `sobol_next_n(x, n)`               | Next *n* points                                   | numeric matrix       |
-| `sobol_skip_to(x, index)`          | Jump to index                                     | invisible(x)         |
-| `sobol_index(x)`                   | Current index                                     | numeric              |
-| `sobol_dimensions(x)`              | Number of dimensions                              | integer              |
+| Function | Purpose | Output |
+|----|----|----|
+| `sobol_design(lower, upper, nseq)` | Scaled parameter design (recommended entry point) | data frame |
+| `sobol_points(n, dim, skip = 0)` | Raw Sobol matrix in \[0,1) | numeric matrix |
+| `sobol_generator(dim, skip = 0)` | Stateful generator object | S3 `sobol_generator` |
+| `sobol_next(x)` | Next single point | numeric vector |
+| `sobol_next_n(x, n)` | Next *n* points | numeric matrix |
+| `sobol_skip_to(x, index)` | Jump to index | invisible(x) |
+| `sobol_index(x)` | Current index | numeric |
+| `sobol_dimensions(x)` | Number of dimensions | integer |
 
 ``` r
+
 a <- sobol_design(lower = c(p = 0), upper = c(p = 1), nseq = 64)
 b <- sobol_design(lower = c(p = 0), upper = c(p = 1), nseq = 64)
 identical(a, b)   # TRUE
@@ -127,6 +133,7 @@ identical(a, b)   # TRUE
 Generate a matrix of Sobol points in one call:
 
 ``` r
+
 library(sobol)
 
 # Generate 1000 points in 5 dimensions
@@ -142,6 +149,7 @@ range(points)  # [1] 0.0000000 0.9999999
 Create a generator object for sequential point generation:
 
 ``` r
+
 # Create a 3-dimensional generator
 gen <- sobol_generator(dimensions = 3)
 print(gen)
@@ -165,6 +173,7 @@ batch <- sobol_next_n(gen, n = 100)
 Jump to specific indices in the sequence:
 
 ``` r
+
 # Start from index 1000
 gen <- sobol_generator(dimensions = 2, skip = 1000)
 
@@ -179,6 +188,7 @@ point <- sobol_next(gen)  # This is point #1000
 Check the current state of a generator:
 
 ``` r
+
 gen <- sobol_generator(dimensions = 3)
 sobol_next_n(gen, n = 50)
 
@@ -232,6 +242,7 @@ Sobol sequences are fully deterministic. Generators with the same
 parameters will always produce identical sequences:
 
 ``` r
+
 gen1 <- sobol_generator(dimensions = 2)
 gen2 <- sobol_generator(dimensions = 2)
 
@@ -245,6 +256,7 @@ The skip functionality enables reproducible subsequences and parallel
 generation:
 
 ``` r
+
 # Generate points 100-199
 worker1 <- sobol_generator(dimensions = 2, skip = 100)
 batch1 <- sobol_next_n(worker1, n = 100)
@@ -259,6 +271,7 @@ batch2 <- sobol_next_n(worker2, n = 100)
 ### Monte Carlo Integration
 
 ``` r
+
 # Integrate a function over [0,1]^d
 integrate_mc <- function(f, dimensions, n_points) {
   points <- sobol_points(n = n_points, dimensions = dimensions)
@@ -273,6 +286,7 @@ result <- integrate_mc(f, dimensions = 2, n_points = 10000)
 ### Parameter Space Exploration
 
 ``` r
+
 # Generate parameter combinations for grid search
 params <- sobol_points(n = 1000, dimensions = 3)
 
@@ -285,6 +299,7 @@ dropout <- params[, 3] * 0.5  # [0, 0.5]
 ### Sensitivity Analysis
 
 ``` r
+
 # Generate input samples for sensitivity analysis
 gen <- sobol_generator(dimensions = 10)
 
@@ -301,6 +316,7 @@ The package uses a header-only C++ implementation with Rcpp for R
 integration. Batch generation is highly optimized:
 
 ``` r
+
 # Generate 1 million points in 10 dimensions
 system.time(sobol_points(n = 1e6, dimensions = 10))
 #   user  system elapsed

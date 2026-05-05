@@ -174,6 +174,7 @@ Additional vignettes - Performance tuning - Community feedback
 ### Quality Checking
 
 ``` r
+
 # Local CRAN check
 devtools::check(cran = TRUE)
 
@@ -196,6 +197,7 @@ spelling::spell_check_package()
 ### Building
 
 ``` r
+
 # Build vignettes
 devtools::build_vignettes()
 
@@ -212,6 +214,7 @@ devtools::install()
 ### Testing
 
 ``` r
+
 # Run tests
 devtools::test()
 

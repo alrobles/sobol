@@ -34,6 +34,7 @@ The package provides a simple interface for generating Sobol sequences.
 Let’s start with a basic example:
 
 ``` r
+
 library(sobol)
 
 # Create a 3-dimensional Sobol generator
@@ -63,6 +64,7 @@ The package supports incremental point generation, which is useful for
 adaptive algorithms:
 
 ``` r
+
 # Create a generator
 gen <- sobol_generator(dimensions = 2)
 
@@ -89,6 +91,7 @@ For reproducibility and parallel processing, you can skip to any point
 in the sequence:
 
 ``` r
+
 # Create a generator starting from index 100
 gen1 <- sobol_generator(dimensions = 2, skip = 100)
 point1 <- sobol_next(gen1)
@@ -108,6 +111,7 @@ print(all.equal(point1, point2))
 For large-scale simulations, generate many points at once:
 
 ``` r
+
 # Generate 1000 points at once
 gen <- sobol_generator(dimensions = 2)
 points <- sobol_next_n(gen, n = 1000)
@@ -128,6 +132,7 @@ One of the key advantages of Sobol sequences is their superior coverage
 of the sampling space:
 
 ``` r
+
 # Generate Sobol points
 gen <- sobol_generator(dimensions = 2)
 sobol_points <- sobol_next_n(gen, n = 1000)
@@ -153,6 +158,7 @@ plot(random_points[, 1], random_points[, 2],
 ![](sobol-sequences_files/figure-html/comparison-1.png)
 
 ``` r
+
 par(mfrow = c(1, 1))
 ```
 
@@ -165,6 +171,7 @@ Sobol sequences can significantly improve the accuracy of Monte Carlo
 integration:
 
 ``` r
+
 # Function to integrate: f(x, y) = x^2 + y^2 over [0,1]^2
 # True value: 2/3
 true_value <- 2 / 3
@@ -209,6 +216,7 @@ legend("topright", c("Random", "Sobol"),
 Sobol sequences maintain their good properties even in high dimensions:
 
 ``` r
+
 # Generate points in 10 dimensions
 gen_10d <- sobol_generator(dimensions = 10)
 points_10d <- sobol_next_n(gen_10d, n = 1000)
@@ -233,6 +241,7 @@ The package uses precomputed direction numbers for up to 1000
 dimensions, providing significant performance improvements:
 
 ``` r
+
 library(microbenchmark)
 
 # Benchmark batch generation
@@ -259,6 +268,7 @@ You can use skip-ahead to generate different portions of the sequence in
 parallel:
 
 ``` r
+
 library(parallel)
 
 # Function to generate points from a specific range
