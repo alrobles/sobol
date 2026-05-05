@@ -7,7 +7,13 @@
 src/*.o
 src/*.so
 .Rproj.user
-old_docs
 /doc/
 /Meta/
+doc
 docs
+old_docs
+ENHANCEMENT_OVERVIEW.md
+ENHANCEMENT_PLAN.md
+ENHANCEMENT_README.md
+IMPLEMENTATION_SUMMARY.md
+RELEASE_CHECKLIST.md
