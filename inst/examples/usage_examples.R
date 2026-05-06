@@ -9,7 +9,7 @@ cat("Example 1: Batch generation\n")
 cat("============================\n\n")
 
 # Generate 10 points in 2 dimensions
-points <- sobol_points(n = 10, dimensions = 2)
+points <- sobol_points(n = 10, dim = 2)
 cat("Generated 10 points in 2 dimensions:\n")
 print(head(points))
 cat(sprintf("\nDimensions: %d x %d\n\n", nrow(points), ncol(points)))
@@ -104,7 +104,7 @@ cat("Example 7: Batch vs Incremental\n")
 cat("================================\n\n")
 
 # Batch generation
-batch_result <- sobol_points(n = 3, dimensions = 2)
+batch_result <- sobol_points(n = 3, dim = 2)
 cat("Batch generation (first 3 points):\n")
 print(batch_result)
 
