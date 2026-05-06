@@ -34,10 +34,7 @@ LinkingTo:
     Rcpp
 Suggests:
     testthat (>= 3.0.0),
-    knitr,
-    rmarkdown,
     ggplot2,
     microbenchmark
-VignetteBuilder: knitr
 RoxygenNote: 7.3.3
 License: GPL (>= 3)
