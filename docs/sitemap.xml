@@ -4,6 +4,10 @@
 <url><loc>https://alrobles.github.io/sobol/articles/sobol-sequences.html</loc></url>
 <url><loc>https://alrobles.github.io/sobol/articles/sobol.html</loc></url>
 <url><loc>https://alrobles.github.io/sobol/authors.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/ENHANCEMENT_OVERVIEW.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/ENHANCEMENT_PLAN.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/ENHANCEMENT_README.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/IMPLEMENTATION_SUMMARY.html</loc></url>
 <url><loc>https://alrobles.github.io/sobol/index.html</loc></url>
 <url><loc>https://alrobles.github.io/sobol/LICENSE.html</loc></url>
 <url><loc>https://alrobles.github.io/sobol/reference/index.html</loc></url>
@@ -19,5 +23,12 @@
 <url><loc>https://alrobles.github.io/sobol/reference/sobol_points.html</loc></url>
 <url><loc>https://alrobles.github.io/sobol/reference/sobol_skip_to.html</loc></url>
 <url><loc>https://alrobles.github.io/sobol/reference/summary.sobol_generator.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/RELEASE_CHECKLIST.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/SUBISSUE_1_CORE_CODE.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/SUBISSUE_2_DOCUMENTATION.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/SUBISSUE_3_TESTS.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/SUBISSUE_4_METADATA.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/SUBISSUE_5_VIGNETTES.html</loc></url>
+<url><loc>https://alrobles.github.io/sobol/SUBISSUE_6_BENCHMARKS.html</loc></url>
 </urlset>
 

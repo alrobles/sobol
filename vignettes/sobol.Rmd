@@ -15,6 +15,9 @@ knitr::opts_chunk$set(
 ```
 
 The **sobol** package generates low‑discrepancy Sobol sequences and is designed from the ground up for **parameter space exploration**.  
+
+
+
 This tutorial will take you from the simplest possible usage to advanced reproducibility and parallel workflows.
 
 ## Installation
@@ -161,14 +164,13 @@ identical(first_10, replicated)  # TRUE
 
 ## 7. Performance notes
 
-The C++ engine is heavily optimised. Even 1 000 000 points in 10 dimensions complete in under a second on modern hardware, freeing you to spend time on your actual model.
+The C++ engine is heavily optimised. Even 1 000 000 points in 10 dimensions complete in under a second on modern hardware, freeing you to spend time on your actual model.
 
 For extremely high dimensions (>1000) the engine falls back to runtime generation – still fast, but initialisation takes a tick longer. Precomputed tables cover the first 1000 dimensions instantly.
 
 ## Next steps
 
 - **Reference** – `?sobol_design`, `?sobol_points`, `?sobol_generator`  
-- **Articles** – “Performance Optimisation” and “Testing Strategy” on the package website  
 - **Real‑world example** – check the `inst/examples/usage_examples.R` file  
 
 ```{r}
@@ -177,6 +179,32 @@ rm(design, raw, gen, a, b, first_10, replicated)
 ```
 
 ---
+
+
+## Acknowledgements
+
+The `sobol_design()` function in this package was inspired by the
+[`sobol_design()`](https://kingaa.github.io/pomp/man/sobol_design.html)
+function from the [**pomp**](https://github.com/kingaa/pomp) package by
+[Aaron A. King](https://github.com/kingaa) et al. — an R package for
+statistical inference using partially observed Markov processes.
+
+While the interface and purpose are similar, **`sobol`** is a ground-up
+reimplementation: the core algorithm is written from scratch in C++17
+and exposed to R via Rcpp, with no shared code from `pomp`. We
+gratefully acknowledge Aaron King’s project as the original source of
+inspiration for the design of this interface.
+
+## References
+
+- Sobol, I.M. (1967). "On the distribution of points in a cube and the approximate evaluation of integrals"
+- Joe, S. and Kuo, F. Y. (2008). "Constructing Sobol sequences with better two-dimensional projections"
+
+## See Also
+
+- [Core C++ Library](https://github.com/alrobles/sobol) - The underlying C++ implementation
+- Examples: `inst/examples/usage_examples.R`
+
 
 That’s all you need to start exploring your parameter space smarter and faster.  
 **Welcome to `sobol`!**
