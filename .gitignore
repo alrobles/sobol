@@ -7,9 +7,6 @@
 src/*.o
 src/*.so
 .Rproj.user
-/doc/
-/Meta/
-doc
 docs
 old_docs
 ENHANCEMENT_OVERVIEW.md

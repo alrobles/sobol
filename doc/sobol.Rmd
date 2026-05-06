@@ -1,0 +1,182 @@
+---
+title: "Getting Started with sobol"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with sobol}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The **sobol** package generates low‑discrepancy Sobol sequences and is designed from the ground up for **parameter space exploration**.  
+This tutorial will take you from the simplest possible usage to advanced reproducibility and parallel workflows.
+
+## Installation
+
+```{r, eval = FALSE}
+# From GitHub
+devtools::install_github("alrobles/sobol")
+```
+
+```{r}
+library(sobol)
+```
+
+## 1. The quickest path: `sobol_design()`
+
+Imagine you are tuning a machine‑learning model with three hyperparameters:
+
+- `learning rate` in `[0.0001, 0.1]`
+- `momentum` in `[0, 0.99]`
+- `dropout` in `[0, 0.5]`
+
+You want to explore the space with 200 well‑spread points. `sobol_design()` returns a **data frame** ready to be fed into your objective function.
+
+```{r}
+design <- sobol_design(
+  lower = c(learning_rate = 0.0001, momentum = 0.00, dropout = 0.0),
+  upper = c(learning_rate = 0.1000, momentum = 0.99, dropout = 0.5),
+  nseq   = 200
+)
+
+head(design)
+```
+
+Points are in the exact ranges you specified:
+
+```{r}
+summary(design)
+```
+
+The design is **deterministic** and **space‑filling** – already a big improvement over simple random or grid search.
+
+```{r, eval = FALSE}
+# Use the design directly inside your optimisation loop
+results <- purrr::pmap_dbl(design, ~ my_model(lr = ..1, mom = ..2, drop = ..3))
+```
+
+## 2. What makes `sobol_design` special?
+
+Behind the scenes it calls `sobol_points()` to generate a **Sobol sequence** in the unit cube and then scales each column to your bounds.  
+
+* **Low discrepancy** – points are more evenly distributed than random.  
+* **Reproducible** – you’ll get the exact same design every time.  
+* **No wasted points** – every evaluation adds information about the shape of your function.
+
+Try it against a random Latin hypercube:
+
+```{r, eval = FALSE}
+# Not run, but you can compare visual uniformity
+plot(design$learning_rate, design$momentum, col = "steelblue",
+     main = "Sobol design (200 points)")
+```
+
+## 3. Going one level deeper: raw points
+
+If you already have your own scaling logic, or need the raw `[0,1)` points, use `sobol_points()` directly.
+
+```{r}
+raw <- sobol_points(n = 512, dim = 4)
+dim(raw)           # 512 rows, 4 columns
+range(raw)         # values in [0, 1)
+```
+
+`sobol_points()` accepts an optional `skip` argument that lets you start from an arbitrary index – perfect for parallel workers (see below).
+
+## 4. Incremental generation with `sobol_generator()`
+
+Sometimes you don’t know in advance how many points you’ll need. Maybe you want to **evaluate a few, check convergence, then generate more**. That’s where the stateful generator shines.
+
+```{r}
+gen <- sobol_generator(dim = 3)
+
+# Generate one point
+sobol_next(gen)
+
+# Generate a batch of 50
+batch <- sobol_next_n(gen, n = 50)
+dim(batch)  # 50 x 3
+
+# What’s the current index?
+sobol_index(gen)
+```
+
+You can also **jump** to any position:
+
+```{r}
+sobol_skip_to(gen, 1000)
+sobol_index(gen)
+```
+
+This is the key to **parallel** and **restart‑friendly** workflows.
+
+## 5. Reproducibility and parallel optimisation
+
+All sequences are deterministic. So two calls with the same parameters will always match:
+
+```{r}
+a <- sobol_design(lower = c(p = 0), upper = c(p = 1), nseq = 32)
+b <- sobol_design(lower = c(p = 0), upper = c(p = 1), nseq = 32)
+identical(a, b)   # TRUE
+```
+
+To distribute work across multiple cores or machines, assign each a **non‑overlapping skip interval**.  
+
+* Worker 1: points `0 – 999`  
+* Worker 2: points `1000 – 1999`  
+* Worker 3: points `2000 – 2999`
+
+```{r}
+# Worker 1
+w1 <- sobol_design(lower = c(lr = 0.0001, mom = 0, drop = 0),
+                   upper = c(lr = 0.1,    mom = 0.99, drop = 0.5),
+                   nseq = 1000)  # implicitly starts at 0
+
+# Worker 2 (needs raw points + skip to 1000)
+raw2 <- sobol_points(n = 1000, dim = 3, skip = 1000)
+# Then scale raw2 manually, or use sobol_design in the future with a skip argument
+```
+
+*(A `skip` argument for `sobol_design()` is under consideration – once available, parallel designs become one‑liners.)*
+
+## 6. Advanced: chaining generators for adaptive sampling
+
+A generator can be “rewound” at any time to re‑evaluate a segment:
+
+```{r}
+gen <- sobol_generator(dim = 2)
+first_10 <- sobol_next_n(gen, n = 10)
+
+# Oops, need to re‑evaluate the first 10 with different parameters
+sobol_skip_to(gen, 0)
+replicated <- sobol_next_n(gen, n = 10)
+identical(first_10, replicated)  # TRUE
+```
+
+## 7. Performance notes
+
+The C++ engine is heavily optimised. Even 1 000 000 points in 10 dimensions complete in under a second on modern hardware, freeing you to spend time on your actual model.
+
+For extremely high dimensions (>1000) the engine falls back to runtime generation – still fast, but initialisation takes a tick longer. Precomputed tables cover the first 1000 dimensions instantly.
+
+## Next steps
+
+- **Reference** – `?sobol_design`, `?sobol_points`, `?sobol_generator`  
+- **Articles** – “Performance Optimisation” and “Testing Strategy” on the package website  
+- **Real‑world example** – check the `inst/examples/usage_examples.R` file  
+
+```{r}
+# Clean up
+rm(design, raw, gen, a, b, first_10, replicated)
+```
+
+---
+
+That’s all you need to start exploring your parameter space smarter and faster.  
+**Welcome to `sobol`!**

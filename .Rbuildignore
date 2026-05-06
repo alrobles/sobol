@@ -2,7 +2,7 @@
 ^\.Rproj\.user$
 ^\.github$
 ^CMakeLists\.txt$
-^build$
+build
 ^tests/test_sobol.*\.cpp$
 ^tools$
 ^scripts$
@@ -10,9 +10,10 @@
 ^README\.Rmd$
 ^LICENSE\.md$
 ^benchmarks$
-^doc$
-^Meta$
+doc
+Meta
 ^_pkgdown\.yml$
-^docs$
+docs
 ^pkgdown$
 ^CRAN-SUBMISSION$
+^cran-comments\.md$
