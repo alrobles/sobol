@@ -235,7 +235,8 @@ rm(design, raw, gen, a, b, first_10, replicated)
 The
 [`sobol_design()`](https://alrobles.github.io/sobol/reference/sobol_design.md)
 function in this package was inspired by the
-[`sobol_design()`](https://kingaa.github.io/pomp/man/sobol_design.html)
+[`sobol_design()`](https://kingaa.github.io/manuals/pomp/html/design.html)
+
 function from the [**pomp**](https://github.com/kingaa/pomp) package by
 [Aaron A. King](https://github.com/kingaa) et al. — an R package for
 statistical inference using partially observed Markov processes.
