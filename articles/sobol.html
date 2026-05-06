@@ -67,9 +67,9 @@
     
 <p>The <strong>sobol</strong> package generates low‑discrepancy Sobol
 sequences and is designed from the ground up for <strong>parameter space
-exploration</strong>.<br>
-This tutorial will take you from the simplest possible usage to advanced
-reproducibility and parallel workflows.</p>
+exploration</strong>.</p>
+<p>This tutorial will take you from the simplest possible usage to
+advanced reproducibility and parallel workflows.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -250,7 +250,7 @@ segment:</p>
 <div class="section level2">
 <h2 id="performance-notes">7. Performance notes<a class="anchor" aria-label="anchor" href="#performance-notes"></a>
 </h2>
-<p>The C++ engine is heavily optimised. Even 1 000 000 points in 10
+<p>The C++ engine is heavily optimised. Even 1 000 000 points in 10
 dimensions complete in under a second on modern hardware, freeing you to
 spend time on your actual model.</p>
 <p>For extremely high dimensions (&gt;1000) the engine falls back to
@@ -266,10 +266,6 @@ Precomputed tables cover the first 1000 dimensions instantly.</p>
 <code><a href="../reference/sobol_points.html">?sobol_points</a></code>, <code><a href="../reference/sobol_generator.html">?sobol_generator</a></code><br>
 </li>
 <li>
-<strong>Articles</strong> – “Performance Optimisation” and “Testing
-Strategy” on the package website<br>
-</li>
-<li>
 <strong>Real‑world example</strong> – check the
 <code>inst/examples/usage_examples.R</code> file</li>
 </ul>
@@ -277,6 +273,43 @@ Strategy” on the package website<br>
 <code class="sourceCode R"><span><span class="co"># Clean up</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">design</span>, <span class="va">raw</span>, <span class="va">gen</span>, <span class="va">a</span>, <span class="va">b</span>, <span class="va">first_10</span>, <span class="va">replicated</span><span class="op">)</span></span></code></pre></div>
 <hr>
+</div>
+<div class="section level2">
+<h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
+</h2>
+<p>The <code><a href="../reference/sobol_design.html">sobol_design()</a></code> function in this package was inspired
+by the <a href="https://kingaa.github.io/pomp/man/sobol_design.html" class="external-link"><code>sobol_design()</code></a>
+function from the <a href="https://github.com/kingaa/pomp" class="external-link"><strong>pomp</strong></a> package
+by <a href="https://github.com/kingaa" class="external-link">Aaron A. King</a> et al. — an R
+package for statistical inference using partially observed Markov
+processes.</p>
+<p>While the interface and purpose are similar,
+<strong><code>sobol</code></strong> is a ground-up reimplementation: the
+core algorithm is written from scratch in C++17 and exposed to R via
+Rcpp, with no shared code from <code>pomp</code>. We gratefully
+acknowledge Aaron King’s project as the original source of inspiration
+for the design of this interface.</p>
+</div>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<ul>
+<li>Sobol, I.M. (1967). “On the distribution of points in a cube and the
+approximate evaluation of integrals”</li>
+<li>Joe, S. and Kuo, F. Y. (2008). “Constructing Sobol sequences with
+better two-dimensional projections”</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="see-also">See Also<a class="anchor" aria-label="anchor" href="#see-also"></a>
+</h2>
+<ul>
+<li>
+<a href="https://github.com/alrobles/sobol" class="external-link">Core C++ Library</a> -
+The underlying C++ implementation</li>
+<li>Examples: <code>inst/examples/usage_examples.R</code>
+</li>
+</ul>
 <p>That’s all you need to start exploring your parameter space smarter
 and faster.<br><strong>Welcome to <code>sobol</code>!</strong></p>
 </div>
