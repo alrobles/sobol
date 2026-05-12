@@ -37,7 +37,7 @@ jobs:
       uses: ilammy/msvc-dev-cmd@v1
 
     - name: Configure CMake
-      run: cmake -S . -B build -G "${{ matrix.cmake_generator }}"
+      run: cmake -S . -B build -G "${{ matrix.cmake_generator }}" -DCMAKE_BUILD_TYPE=Release
 
     - name: Build
       run: cmake --build build --config Release
