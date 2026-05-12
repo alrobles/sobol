@@ -21,7 +21,7 @@ jobs:
           - os: macos-latest
             cmake_generator: "Unix Makefiles"
           - os: windows-latest
-            cmake_generator: "Visual Studio 17 2022"
+            cmake_generator: "Ninja"
 
     steps:
     - name: Checkout code
@@ -30,10 +30,14 @@ jobs:
     - name: Setup CMake
       uses: jwlawson/actions-setup-cmake@v2
       with:
-        cmake-version: '3.16.x'
+        cmake-version: '3.28.x'
+
+    - name: Setup MSVC (Windows)
+      if: runner.os == 'Windows'
+      uses: ilammy/msvc-dev-cmd@v1
 
     - name: Configure CMake
-      run: cmake -S . -B build -G "${{ matrix.cmake_generator }}"
+      run: cmake -S . -B build -G "${{ matrix.cmake_generator }}" -DCMAKE_BUILD_TYPE=Release
 
     - name: Build
       run: cmake --build build --config Release
@@ -64,7 +68,7 @@ jobs:
     - name: Setup CMake
       uses: jwlawson/actions-setup-cmake@v2
       with:
-        cmake-version: '3.16.x'
+        cmake-version: '3.28.x'
 
     - name: Configure CMake with SOBOL_NO_PRECOMPUTED_TABLES
       run: cmake -S . -B build -DCMAKE_CXX_FLAGS="-DSOBOL_NO_PRECOMPUTED_TABLES"
@@ -91,13 +95,15 @@ jobs:
     - name: Setup CMake
       uses: jwlawson/actions-setup-cmake@v2
       with:
-        cmake-version: '3.16.x'
+        cmake-version: '3.28.x'
 
     - name: Configure CMake with coverage flags
       run: |
         cmake -S . -B build \
           -DCMAKE_CXX_FLAGS="--coverage -fprofile-arcs -ftest-coverage" \
-          -DCMAKE_BUILD_TYPE=Debug
+          -DCMAKE_EXE_LINKER_FLAGS="--coverage" \
+          -DCMAKE_BUILD_TYPE=Debug \
+          -DENABLE_OPTIMIZATIONS=OFF
 
     - name: Build
       run: cmake --build build
@@ -107,9 +113,9 @@ jobs:
 
     - name: Generate coverage report
       run: |
-        lcov --capture --directory build --output-file coverage.info
-        lcov --remove coverage.info '/usr/*' --output-file coverage.info
-        lcov --list coverage.info
+        lcov --capture --directory build --output-file coverage.info --ignore-errors empty
+        lcov --remove coverage.info '/usr/*' --output-file coverage.info --ignore-errors empty
+        lcov --list coverage.info --ignore-errors empty
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4

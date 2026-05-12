@@ -23,7 +23,7 @@ Generates n consecutive points from the Sobol sequence and advances the
 internal state of the generator.
 }
 \examples{
-\dontrun{
+\donttest{
 gen <- sobol_generator(dimensions = 2)
 points <- sobol_next_n(gen, n = 10)
 print(dim(points)) # [1] 10  2

@@ -15,7 +15,7 @@
 #'   \item{initial_skip}{Initial skip value used at construction}
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Create a 3-dimensional Sobol generator
 #' gen <- sobol_generator(dimensions = 3)
 #'
@@ -79,7 +79,7 @@ sobol_generator <- function(dimensions, skip = 0) {
 #'   containing the next point in the Sobol sequence. Values are in [0, 1).
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' gen <- sobol_generator(dimensions = 3)
 #' point <- sobol_next(gen)
 #' print(point) # e.g., [0.5, 0.5, 0.5]
@@ -111,7 +111,7 @@ sobol_next <- function(x, ...) {
 #'   If n = 0, returns a 0 x dimensions matrix.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' gen <- sobol_generator(dimensions = 2)
 #' points <- sobol_next_n(gen, n = 10)
 #' print(dim(points)) # [1] 10  2
@@ -147,7 +147,7 @@ sobol_next_n <- function(x, n, ...) {
 #'   The primary purpose is the side effect of updating the internal state.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' gen <- sobol_generator(dimensions = 2)
 #' sobol_skip_to(gen, 100)
 #' point <- sobol_next(gen) # This is the 100th point (0-indexed)
@@ -182,7 +182,7 @@ sobol_skip_to <- function(x, index, ...) {
 #' @return A numeric value representing the current index (0-based).
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' gen <- sobol_generator(dimensions = 2)
 #' sobol_next(gen)
 #' sobol_next(gen)
@@ -212,7 +212,7 @@ sobol_index <- function(x, ...) {
 #' @return An integer representing the number of dimensions.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' gen <- sobol_generator(dimensions = 5)
 #' dims <- sobol_dimensions(gen)
 #' print(dims) # 5
