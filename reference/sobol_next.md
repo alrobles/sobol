@@ -28,9 +28,10 @@ the next point in the Sobol sequence. Values are in \[0, 1).
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
+# \donttest{
 gen <- sobol_generator(dimensions = 3)
 point <- sobol_next(gen)
 print(point) # e.g., [0.5, 0.5, 0.5]
-} # }
+#> [1] 0 0 0
+# }
 ```

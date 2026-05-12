@@ -27,11 +27,14 @@ A numeric value representing the current index (0-based).
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
+# \donttest{
 gen <- sobol_generator(dimensions = 2)
 sobol_next(gen)
+#> [1] 0 0
 sobol_next(gen)
+#> [1] 0.5 0.5
 idx <- sobol_index(gen)
 print(idx) # 2
-} # }
+#> [1] 2
+# }
 ```

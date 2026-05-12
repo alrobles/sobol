@@ -53,10 +53,11 @@ for incremental generation with state
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
+# \donttest{
 # Generate 1000 points in 5 dimensions
 points <- sobol_points(n = 1000, dim = 5)
 dim(points) # [1] 1000    5
+#> [1] 1000    5
 
 # Skip the first 100 points
 points_skipped <- sobol_points(n = 100, dim = 2, skip = 100)
@@ -64,5 +65,6 @@ points_skipped <- sobol_points(n = 100, dim = 2, skip = 100)
 # Empty result
 empty <- sobol_points(n = 0, dim = 3)
 dim(empty) # [1] 0 3
-} # }
+#> [1] 0 3
+# }
 ```

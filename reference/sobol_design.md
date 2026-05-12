@@ -69,7 +69,7 @@ for incremental generation
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
+# \donttest{
 # Generate 100 parameter sets for two parameters
 design <- sobol_design(
   lower = c(a = 0, b = 100),
@@ -77,9 +77,17 @@ design <- sobol_design(
   nseq = 100
 )
 head(design)
+#>           a        b
+#> 1 0.0234375 182.0312
+#> 2 0.5234375 132.0312
+#> 3 0.7734375 157.0312
+#> 4 0.2734375 107.0312
+#> 5 0.3984375 144.5312
+#> 6 0.8984375 194.5312
 
 # Plot the design
 plot(design$a, design$b, main = "Sobol Design")
+
 
 # High-dimensional example
 params <- paste0("param", 1:10)
@@ -88,5 +96,5 @@ design_10d <- sobol_design(
   upper = setNames(rep(1, 10), params),
   nseq = 1000
 )
-} # }
+# }
 ```

@@ -26,9 +26,10 @@ An integer representing the number of dimensions.
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
+# \donttest{
 gen <- sobol_generator(dimensions = 5)
 dims <- sobol_dimensions(gen)
 print(dims) # 5
-} # }
+#> [1] 5
+# }
 ```
