@@ -53,6 +53,7 @@ jobs:
       run: |
         R CMD INSTALL .
         Rscript -e 'library(sobol); testthat::test_dir("tests/testthat")'
+      shell: bash
       continue-on-error: false
 
     - name: Test coverage
@@ -114,6 +115,7 @@ jobs:
 
     - name: Install package
       run: R CMD INSTALL .
+      shell: bash
 
     - name: Run examples
       run: |
