@@ -30,7 +30,7 @@
 #' drop-in replacement.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Generate 100 parameter sets for two parameters
 #' design <- sobol_design(
 #'   lower = c(a = 0, b = 100),

@@ -25,7 +25,7 @@ incremental point generation. The generator maintains internal state
 and allows for efficient generation of quasi-random sequences.
 }
 \examples{
-\dontrun{
+\donttest{
 # Create a 3-dimensional Sobol generator
 gen <- sobol_generator(dimensions = 3)
 

@@ -31,7 +31,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Generate 1000 points in 5 dimensions
 #' points <- sobol_points(n = 1000, dim = 5)
 #' dim(points) # [1] 1000    5
