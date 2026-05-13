@@ -19,6 +19,11 @@ Useful links:
 \author{
 \strong{Maintainer}: Angel Robles \email{a.l.robles.fernandez@gmail.com}
 
+Authors:
+\itemize{
+  \item Angel Robles \email{a.l.robles.fernandez@gmail.com}
+}
+
 Other contributors:
 \itemize{
   \item Ilya M. Sobol (Original Sobol sequence algorithm) [contributor]

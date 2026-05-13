@@ -7,7 +7,9 @@
 \item{n}{Integer, the number of points to generate. Must be non-negative.}
 
 \item{dim}{Integer, the number of dimensions for each point.
-Must be a positive integer.}
+Must be a positive integer. The first 1000 dimensions use precomputed
+direction numbers for instant initialization; higher dimensions fall
+back to runtime generation.}
 
 \item{skip}{Numeric, the number of initial points to skip (default: 0).
 This allows generating subsequences of the Sobol sequence.}
@@ -51,5 +53,6 @@ dim(empty) # [1] 0 3
 
 }
 \seealso{
-\code{\link{sobol_generator}} for incremental generation with state
+\code{\link{sobol_generator}} for incremental generation with
+  state, \code{\link{sobol_design}} for scaled parameter-space designs
 }

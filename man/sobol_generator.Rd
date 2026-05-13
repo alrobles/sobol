@@ -8,7 +8,8 @@ sobol_generator(dimensions, skip = 0)
 }
 \arguments{
 \item{dimensions}{Integer, the number of dimensions for the Sobol sequence.
-Must be a positive integer.}
+Must be a positive integer. The first 1000 dimensions use precomputed
+direction numbers; higher dimensions use runtime generation.}
 
 \item{skip}{Numeric, the number of initial points to skip (default: 0).
 This allows starting the sequence from any index for reproducibility.}
@@ -40,4 +41,8 @@ sobol_skip_to(gen, 1000)
 # Create a generator starting from index 50
 gen2 <- sobol_generator(dimensions = 2, skip = 50)
 
+}
+\seealso{
+\code{\link{sobol_points}} for stateless batch generation,
+  \code{\link{sobol_design}} for scaled parameter-space designs
 }

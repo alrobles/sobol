@@ -97,7 +97,7 @@ range(raw)         # values in [0, 1)
 Sometimes you don’t know in advance how many points you’ll need. Maybe you want to **evaluate a few, check convergence, then generate more**. That’s where the stateful generator shines.
 
 ```{r}
-gen <- sobol_generator(dim = 3)
+gen <- sobol_generator(dimensions = 3)
 
 # Generate one point
 sobol_next(gen)
@@ -153,7 +153,7 @@ raw2 <- sobol_points(n = 1000, dim = 3, skip = 1000)
 A generator can be “rewound” at any time to re‑evaluate a segment:
 
 ```{r}
-gen <- sobol_generator(dim = 2)
+gen <- sobol_generator(dimensions = 2)
 first_10 <- sobol_next_n(gen, n = 10)
 
 # Oops, need to re‑evaluate the first 10 with different parameters
