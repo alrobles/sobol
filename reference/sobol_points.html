@@ -91,8 +91,7 @@ which is useful for:</p><ul><li><p>Reproducibility: generating the same subseque
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="co"># Generate 1000 points in 5 dimensions</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Generate 1000 points in 5 dimensions</span></span></span>
 <span class="r-in"><span><span class="va">points</span> <span class="op">&lt;-</span> <span class="fu">sobol_points</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1000</span>, dim <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">points</span><span class="op">)</span> <span class="co"># [1] 1000    5</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1000    5</span>
@@ -104,7 +103,6 @@ which is useful for:</p><ul><li><p>Reproducibility: generating the same subseque
 <span class="r-in"><span><span class="va">empty</span> <span class="op">&lt;-</span> <span class="fu">sobol_points</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">0</span>, dim <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">empty</span><span class="op">)</span> <span class="co"># [1] 0 3</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0 3</span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

@@ -33,10 +33,8 @@ represents a point in the Sobol sequence. Values are in \[0, 1). If n =
 ## Examples
 
 ``` r
-# \donttest{
 gen <- sobol_generator(dimensions = 2)
 points <- sobol_next_n(gen, n = 10)
 print(dim(points)) # [1] 10  2
 #> [1] 10  2
-# }
 ```

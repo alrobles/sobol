@@ -41,7 +41,6 @@ An S3 object of class "sobol_generator" containing:
 ## Examples
 
 ``` r
-# \donttest{
 # Create a 3-dimensional Sobol generator
 gen <- sobol_generator(dimensions = 3)
 
@@ -56,5 +55,4 @@ sobol_skip_to(gen, 1000)
 
 # Create a generator starting from index 50
 gen2 <- sobol_generator(dimensions = 2, skip = 50)
-# }
 ```
