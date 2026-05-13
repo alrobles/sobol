@@ -4,9 +4,13 @@
 *.tar.gz
 *.o
 *.so
+*.dll
 src/*.o
 src/*.so
+src/*.dll
 .Rproj.user
+doc/
+Meta/
 docs
 old_docs
 ENHANCEMENT_OVERVIEW.md
@@ -14,3 +18,4 @@ ENHANCEMENT_PLAN.md
 ENHANCEMENT_README.md
 IMPLEMENTATION_SUMMARY.md
 RELEASE_CHECKLIST.md
+.Rhistory
