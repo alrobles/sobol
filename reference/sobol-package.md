@@ -26,6 +26,10 @@ Useful links:
 
 **Maintainer**: Angel Robles <a.l.robles.fernandez@gmail.com>
 
+Authors:
+
+- Angel Robles <a.l.robles.fernandez@gmail.com>
+
 Other contributors:
 
 - Ilya M. Sobol (Original Sobol sequence algorithm) \[contributor\]

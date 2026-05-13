@@ -15,7 +15,9 @@ instead.
 - dim:
 
   Integer, the number of dimensions for each point. Must be a positive
-  integer.
+  integer. The first 1000 dimensions use precomputed direction numbers
+  for instant initialization; higher dimensions fall back to runtime
+  generation.
 
 - skip:
 
@@ -48,7 +50,9 @@ which is useful for:
 ## See also
 
 [`sobol_generator`](https://alrobles.github.io/sobol/reference/sobol_generator.md)
-for incremental generation with state
+for incremental generation with state,
+[`sobol_design`](https://alrobles.github.io/sobol/reference/sobol_design.md)
+for scaled parameter-space designs
 
 ## Examples
 

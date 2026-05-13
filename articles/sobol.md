@@ -123,7 +123,7 @@ That’s where the stateful generator shines.
 
 ``` r
 
-gen <- sobol_generator(dim = 3)
+gen <- sobol_generator(dimensions = 3)
 
 # Generate one point
 sobol_next(gen)
@@ -193,7 +193,7 @@ A generator can be “rewound” at any time to re‑evaluate a segment:
 
 ``` r
 
-gen <- sobol_generator(dim = 2)
+gen <- sobol_generator(dimensions = 2)
 first_10 <- sobol_next_n(gen, n = 10)
 
 # Oops, need to re‑evaluate the first 10 with different parameters

@@ -15,7 +15,8 @@ sobol_generator(dimensions, skip = 0)
 - dimensions:
 
   Integer, the number of dimensions for the Sobol sequence. Must be a
-  positive integer.
+  positive integer. The first 1000 dimensions use precomputed direction
+  numbers; higher dimensions use runtime generation.
 
 - skip:
 
@@ -37,6 +38,13 @@ An S3 object of class "sobol_generator" containing:
 - initial_skip:
 
   Initial skip value used at construction
+
+## See also
+
+[`sobol_points`](https://alrobles.github.io/sobol/reference/sobol_points.md)
+for stateless batch generation,
+[`sobol_design`](https://alrobles.github.io/sobol/reference/sobol_design.md)
+for scaled parameter-space designs
 
 ## Examples
 

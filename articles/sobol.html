@@ -37,6 +37,7 @@
 <li><a class="dropdown-item" href="../articles/sobol-sequences.html">Introduction to Sobol Sequences</a></li>
   </ul>
 </li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -177,7 +178,7 @@ parallel workers (see below).</p>
 Maybe you want to <strong>evaluate a few, check convergence, then
 generate more</strong>. That’s where the stateful generator shines.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gen</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sobol_generator.html">sobol_generator</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">gen</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sobol_generator.html">sobol_generator</a></span><span class="op">(</span>dimensions <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Generate one point</span></span>
 <span><span class="fu"><a href="../reference/sobol_next.html">sobol_next</a></span><span class="op">(</span><span class="va">gen</span><span class="op">)</span></span>
@@ -238,7 +239,7 @@ one‑liners.)</em></p>
 <p>A generator can be “rewound” at any time to re‑evaluate a
 segment:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gen</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sobol_generator.html">sobol_generator</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">gen</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sobol_generator.html">sobol_generator</a></span><span class="op">(</span>dimensions <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">first_10</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sobol_next_n.html">sobol_next_n</a></span><span class="op">(</span><span class="va">gen</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Oops, need to re‑evaluate the first 10 with different parameters</span></span>
