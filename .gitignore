@@ -9,7 +9,8 @@ src/*.o
 src/*.so
 src/*.dll
 .Rproj.user
-doc/
+/doc/
+!inst/doc/
 Meta/
 docs
 old_docs
