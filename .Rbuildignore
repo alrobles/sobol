@@ -9,8 +9,8 @@ build
 ^README\.Rmd$
 ^LICENSE\.md$
 ^benchmarks$
-doc
-Meta
+^doc$
+^Meta$
 ^_pkgdown\.yml$
 docs
 ^pkgdown$
