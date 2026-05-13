@@ -31,7 +31,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' # Generate 1000 points in 5 dimensions
 #' points <- sobol_points(n = 1000, dim = 5)
 #' dim(points) # [1] 1000    5
@@ -42,7 +41,6 @@
 #' # Empty result
 #' empty <- sobol_points(n = 0, dim = 3)
 #' dim(empty) # [1] 0 3
-#' }
 #'
 #' @seealso \code{\link{sobol_generator}} for incremental generation with state
 #'

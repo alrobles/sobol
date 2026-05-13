@@ -20,10 +20,8 @@ Generates a single point from the Sobol sequence and advances the
 internal state of the generator.
 }
 \examples{
-\donttest{
 gen <- sobol_generator(dimensions = 3)
 point <- sobol_next(gen)
 print(point) # e.g., [0.5, 0.5, 0.5]
-}
 
 }

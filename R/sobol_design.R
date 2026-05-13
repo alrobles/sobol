@@ -30,7 +30,6 @@
 #' drop-in replacement.
 #'
 #' @examples
-#' \donttest{
 #' # Generate 100 parameter sets for two parameters
 #' design <- sobol_design(
 #'   lower = c(a = 0, b = 100),
@@ -49,7 +48,6 @@
 #'   upper = setNames(rep(1, 10), params),
 #'   nseq = 1000
 #' )
-#' }
 #'
 #' @references
 #' Bratley, P., & Fox, B. L. (1988). Algorithm 659: Implementing Sobol's
