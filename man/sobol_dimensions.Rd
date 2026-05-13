@@ -18,10 +18,8 @@ An integer representing the number of dimensions.
 Returns the number of dimensions configured for the generator.
 }
 \examples{
-\donttest{
 gen <- sobol_generator(dimensions = 5)
 dims <- sobol_dimensions(gen)
 print(dims) # 5
-}
 
 }

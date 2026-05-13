@@ -24,10 +24,8 @@ Sobol sequence. This allows for reproducible subsequences and parallel
 generation strategies.
 }
 \examples{
-\donttest{
 gen <- sobol_generator(dimensions = 2)
 sobol_skip_to(gen, 100)
 point <- sobol_next(gen) # This is the 100th point (0-indexed)
-}
 
 }

@@ -41,7 +41,6 @@ function from the pomp-explore package, allowing for easy comparison and
 drop-in replacement.
 }
 \examples{
-\donttest{
 # Generate 100 parameter sets for two parameters
 design <- sobol_design(
   lower = c(a = 0, b = 100),
@@ -60,7 +59,6 @@ design_10d <- sobol_design(
   upper = setNames(rep(1, 10), params),
   nseq = 1000
 )
-}
 
 }
 \references{

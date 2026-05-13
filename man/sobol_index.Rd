@@ -19,12 +19,10 @@ Returns the current index of the generator, which is the index of the
 next point that will be generated.
 }
 \examples{
-\donttest{
 gen <- sobol_generator(dimensions = 2)
 sobol_next(gen)
 sobol_next(gen)
 idx <- sobol_index(gen)
 print(idx) # 2
-}
 
 }

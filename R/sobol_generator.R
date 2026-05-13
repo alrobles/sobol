@@ -15,7 +15,6 @@
 #'   \item{initial_skip}{Initial skip value used at construction}
 #'
 #' @examples
-#' \donttest{
 #' # Create a 3-dimensional Sobol generator
 #' gen <- sobol_generator(dimensions = 3)
 #'
@@ -30,7 +29,6 @@
 #'
 #' # Create a generator starting from index 50
 #' gen2 <- sobol_generator(dimensions = 2, skip = 50)
-#' }
 #'
 #' @export
 #' @importFrom methods new
@@ -79,11 +77,9 @@ sobol_generator <- function(dimensions, skip = 0) {
 #'   containing the next point in the Sobol sequence. Values are in [0, 1).
 #'
 #' @examples
-#' \donttest{
 #' gen <- sobol_generator(dimensions = 3)
 #' point <- sobol_next(gen)
 #' print(point) # e.g., [0.5, 0.5, 0.5]
-#' }
 #'
 #' @export
 sobol_next <- function(x, ...) {
@@ -111,11 +107,9 @@ sobol_next <- function(x, ...) {
 #'   If n = 0, returns a 0 x dimensions matrix.
 #'
 #' @examples
-#' \donttest{
 #' gen <- sobol_generator(dimensions = 2)
 #' points <- sobol_next_n(gen, n = 10)
 #' print(dim(points)) # [1] 10  2
-#' }
 #'
 #' @export
 sobol_next_n <- function(x, n, ...) {
@@ -147,11 +141,9 @@ sobol_next_n <- function(x, n, ...) {
 #'   The primary purpose is the side effect of updating the internal state.
 #'
 #' @examples
-#' \donttest{
 #' gen <- sobol_generator(dimensions = 2)
 #' sobol_skip_to(gen, 100)
 #' point <- sobol_next(gen) # This is the 100th point (0-indexed)
-#' }
 #'
 #' @export
 sobol_skip_to <- function(x, index, ...) {
@@ -182,13 +174,11 @@ sobol_skip_to <- function(x, index, ...) {
 #' @return A numeric value representing the current index (0-based).
 #'
 #' @examples
-#' \donttest{
 #' gen <- sobol_generator(dimensions = 2)
 #' sobol_next(gen)
 #' sobol_next(gen)
 #' idx <- sobol_index(gen)
 #' print(idx) # 2
-#' }
 #'
 #' @export
 sobol_index <- function(x, ...) {
@@ -212,11 +202,9 @@ sobol_index <- function(x, ...) {
 #' @return An integer representing the number of dimensions.
 #'
 #' @examples
-#' \donttest{
 #' gen <- sobol_generator(dimensions = 5)
 #' dims <- sobol_dimensions(gen)
 #' print(dims) # 5
-#' }
 #'
 #' @export
 sobol_dimensions <- function(x, ...) {
