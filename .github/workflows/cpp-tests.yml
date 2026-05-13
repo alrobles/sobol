@@ -2,7 +2,7 @@ name: C++ Tests
 
 on:
   push:
-    branches: [ main, develop, claude/** ]
+    branches: [ main, develop, claude/**, devin/** ]
   pull_request:
     branches: [ main, develop ]
   workflow_dispatch:

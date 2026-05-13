@@ -6,15 +6,13 @@ build
 ^tests/test_sobol.*\.cpp$
 ^tools$
 ^scripts$
-^.*\.md$
 ^README\.Rmd$
 ^LICENSE\.md$
 ^benchmarks$
-doc
-Meta
+^doc$
+^Meta$
 ^_pkgdown\.yml$
 docs
 ^pkgdown$
 ^CRAN-SUBMISSION$
 ^cran-comments\.md$
-^vignettes$
