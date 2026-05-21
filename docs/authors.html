@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">sobol</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,6 +21,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="articles/sobol-sequences.html">Introduction to Sobol Sequences</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/alrobles/sobol/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -42,42 +43,65 @@
           <p><strong>Angel Robles</strong>. Author, maintainer.
           </p>
         </li>
-        <li>
-          <p><strong>Ilya M. Sobol</strong>. Contributor.
-          <br><small>Original Sobol sequence algorithm</small></p>
-        </li>
-        <li>
-          <p><strong>Paul Bratley</strong>. Contributor.
-          <br><small>Algorithm implementation reference</small></p>
-        </li>
-        <li>
-          <p><strong>Bennett L. Fox</strong>. Contributor.
-          <br><small>Algorithm implementation reference</small></p>
-        </li>
-        <li>
-          <p><strong>Stephen Joe</strong>. Contributor.
-          <br><small>Direction numbers and primitive polynomials</small></p>
-        </li>
-        <li>
-          <p><strong>Frances Y. Kuo</strong>. Contributor.
-          <br><small>Direction numbers and primitive polynomials</small></p>
-        </li>
       </ul></div>
 
     <div class="section level2">
       <h2 id="citation">Citation</h2>
-      <p><small class="dont-index">Source: <a href="https://github.com/alrobles/sobol/blob/HEAD/DESCRIPTION" class="external-link"><code>DESCRIPTION</code></a></small></p>
+      <p><small class="dont-index">Source: <a href="https://github.com/alrobles/sobol/blob/HEAD/inst/CITATION" class="external-link"><code>inst/CITATION</code></a></small></p>
 
       <p>Robles A (2026).
 <em>sobol: Quasi-Monte Carlo Sobol Sequence Generator</em>.
-R package version 1.0.0, <a href="https://alrobles.github.io/sobol/">https://alrobles.github.io/sobol/</a>.
+R package version 1.0.1, <a href="https://alrobles.github.io/sobol/">https://alrobles.github.io/sobol/</a>.
 </p>
       <pre>@Manual{,
   title = {sobol: Quasi-Monte Carlo Sobol Sequence Generator},
   author = {Angel Robles},
   year = {2026},
-  note = {R package version 1.0.0},
+  note = {R package version 1.0.1},
   url = {https://alrobles.github.io/sobol/},
+}</pre>
+      <p>Bratley P, Fox B (1988).
+“Algorithm 659: Implementing Sobol's quasirandom sequence generator.”
+<em>ACM Transactions on Mathematical Software</em>, <b>14</b>(1), 88–100.
+<a href="https://doi.org/10.1145/42288.214372" class="external-link">doi:10.1145/42288.214372</a>.
+</p>
+      <pre>@Article{,
+  title = {Algorithm 659: Implementing Sobol's quasirandom sequence generator},
+  author = {Paul Bratley and Bennett L. Fox},
+  journal = {ACM Transactions on Mathematical Software},
+  year = {1988},
+  volume = {14},
+  number = {1},
+  pages = {88--100},
+  doi = {10.1145/42288.214372},
+}</pre>
+      <p>Joe S, Kuo F (2008).
+“Constructing Sobol sequences with better two-dimensional projections.”
+<em>SIAM Journal on Scientific Computing</em>, <b>30</b>(5), 2635–2654.
+<a href="https://doi.org/10.1145/1358628.1358630" class="external-link">doi:10.1145/1358628.1358630</a>.
+</p>
+      <pre>@Article{,
+  title = {Constructing Sobol sequences with better two-dimensional projections},
+  author = {Stephen Joe and Frances Y. Kuo},
+  journal = {SIAM Journal on Scientific Computing},
+  year = {2008},
+  volume = {30},
+  number = {5},
+  pages = {2635--2654},
+  doi = {10.1145/1358628.1358630},
+}</pre>
+      <p>Sobol' I (1967).
+“Distribution of points in a cube and approximate evaluation of integrals.”
+<em>USSR Computational Mathematics and Mathematical Physics</em>, <b>7</b>(4), 86–112.
+</p>
+      <pre>@Article{,
+  title = {Distribution of points in a cube and approximate evaluation of integrals},
+  author = {Ilya M. Sobol'},
+  journal = {USSR Computational Mathematics and Mathematical Physics},
+  year = {1967},
+  volume = {7},
+  number = {4},
+  pages = {86--112},
 }</pre>
     </div>
 
