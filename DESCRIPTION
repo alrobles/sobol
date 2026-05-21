@@ -1,7 +1,7 @@
 Package: sobol
 Type: Package
 Title: Quasi-Monte Carlo Sobol Sequence Generator
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: person("Angel", "Robles", email = "a.l.robles.fernandez@gmail.com", role = c("aut", "cre"))
 Description: Provides a fast and efficient implementation of Sobol sequences
     for quasi-Monte Carlo methods. The Sobol sequence is a low-discrepancy
