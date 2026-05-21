@@ -2,6 +2,8 @@
 
 ## sobol 1.0.0
 
+CRAN release: 2026-05-18
+
 - Initial CRAN release.
 - Core C++17 Sobol sequence engine with precomputed direction numbers
   for up to 1000 dimensions.

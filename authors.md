@@ -4,21 +4,6 @@
 
 - **Angel Robles**. Author, maintainer.
 
-- **Ilya M. Sobol**. Contributor.  
-  Original Sobol sequence algorithm
-
-- **Paul Bratley**. Contributor.  
-  Algorithm implementation reference
-
-- **Bennett L. Fox**. Contributor.  
-  Algorithm implementation reference
-
-- **Stephen Joe**. Contributor.  
-  Direction numbers and primitive polynomials
-
-- **Frances Y. Kuo**. Contributor.  
-  Direction numbers and primitive polynomials
-
 ## Citation
 
 Source:
