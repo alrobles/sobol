@@ -1,0 +1,49 @@
+bibentry(
+  bibtype  = "Manual",
+  title    = "sobol: Quasi-Monte Carlo Sobol Sequence Generator",
+  author   = person("Angel", "Robles", email = "a.l.robles.fernandez@gmail.com"),
+  year     = "2026",
+  note     = "R package version 1.0.1",
+  url      = "https://alrobles.github.io/sobol/"
+)
+
+bibentry(
+  bibtype  = "Article",
+  title    = "Algorithm 659: Implementing Sobol's quasirandom sequence generator",
+  author   = c(
+    person("Paul", "Bratley"),
+    person("Bennett L.", "Fox")
+  ),
+  journal  = "ACM Transactions on Mathematical Software",
+  year     = "1988",
+  volume   = "14",
+  number   = "1",
+  pages    = "88--100",
+  doi      = "10.1145/42288.214372"
+)
+
+bibentry(
+  bibtype  = "Article",
+  title    = "Constructing Sobol sequences with better two-dimensional projections",
+  author   = c(
+    person("Stephen", "Joe"),
+    person("Frances Y.", "Kuo")
+  ),
+  journal  = "SIAM Journal on Scientific Computing",
+  year     = "2008",
+  volume   = "30",
+  number   = "5",
+  pages    = "2635--2654",
+  doi      = "10.1145/1358628.1358630"
+)
+
+bibentry(
+  bibtype  = "Article",
+  title    = "Distribution of points in a cube and approximate evaluation of integrals",
+  author   = person("Ilya M.", "Sobol'"),
+  journal  = "USSR Computational Mathematics and Mathematical Physics",
+  year     = "1967",
+  volume   = "7",
+  number   = "4",
+  pages    = "86--112"
+)
