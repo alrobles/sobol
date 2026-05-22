@@ -25,21 +25,3 @@ Useful links:
 ## Author
 
 **Maintainer**: Angel Robles <a.l.robles.fernandez@gmail.com>
-
-Authors:
-
-- Angel Robles <a.l.robles.fernandez@gmail.com>
-
-Other contributors:
-
-- Ilya M. Sobol (Original Sobol sequence algorithm) \[contributor\]
-
-- Paul Bratley (Algorithm implementation reference) \[contributor\]
-
-- Bennett L. Fox (Algorithm implementation reference) \[contributor\]
-
-- Stephen Joe (Direction numbers and primitive polynomials)
-  \[contributor\]
-
-- Frances Y. Kuo (Direction numbers and primitive polynomials)
-  \[contributor\]
