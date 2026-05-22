@@ -19,19 +19,5 @@ Useful links:
 \author{
 \strong{Maintainer}: Angel Robles \email{a.l.robles.fernandez@gmail.com}
 
-Authors:
-\itemize{
-  \item Angel Robles \email{a.l.robles.fernandez@gmail.com}
-}
-
-Other contributors:
-\itemize{
-  \item Ilya M. Sobol (Original Sobol sequence algorithm) [contributor]
-  \item Paul Bratley (Algorithm implementation reference) [contributor]
-  \item Bennett L. Fox (Algorithm implementation reference) [contributor]
-  \item Stephen Joe (Direction numbers and primitive polynomials) [contributor]
-  \item Frances Y. Kuo (Direction numbers and primitive polynomials) [contributor]
-}
-
 }
 \keyword{internal}
